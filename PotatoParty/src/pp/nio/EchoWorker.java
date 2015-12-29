@@ -1,12 +1,17 @@
 package pp.nio;
 
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import test.Game2048Model;
 
 public class EchoWorker implements Runnable {
 	
 	private List<ServerDataEvent> queue = new LinkedList<ServerDataEvent>();
+	
+	private ArrayList<Game2048Model> games = new ArrayList<Game2048Model>();
 	  
 	  public void processData(NioServer server, SocketChannel socket, byte[] data, int count) {
 	    byte[] dataCopy = new byte[count];
@@ -33,8 +38,14 @@ public class EchoWorker implements Runnable {
 	      }
 	      
 	      // Return to sender
-	      dataEvent.server.send(dataEvent.socket, dataEvent.data);
-	      System.out.println("Server received $> " + new String(dataEvent.data));
+	      String message = new String(dataEvent.data);
+	      System.out.println("Server received $> " + message);
+	      
+	      if(message.equals("initialize")) {
+	    	  games.add(new Game2048Model());
+	      }
+	      
+	      dataEvent.server.send(dataEvent.socket, "update GRID !".getBytes());
 	    }
 	  }
 

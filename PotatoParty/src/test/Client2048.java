@@ -6,6 +6,10 @@ public class Client2048 {
 
 	private static GridPanel gridPanel;
 	
+	/**
+	 * The main. Yolo.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		JFrame frame = new JFrame();

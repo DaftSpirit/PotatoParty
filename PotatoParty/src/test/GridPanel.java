@@ -9,6 +9,9 @@ public class GridPanel extends JPanel {
 	
 	private Game2048Model model;
 	
+	/**
+	 * The main panel, containing the model of the game.
+	 */
 	public GridPanel() {
 		this.model = new Game2048Model();
     }

@@ -11,35 +11,54 @@ import java.awt.image.BufferedImage;
 
 public class Cell {
 	
-	private int value;
-	private Point pos;
 	
+	private int value;
+	private Color ValueColor = Color.PINK;
+
+	private Point position;
+
 	public static final int CELL_WIDTH = 170;
 	
-	public Cell(int xx, int yy, int value)
+	/**
+	 * Constructor which is called on instanciation of the grid.
+	 * @param x
+	 * @param y
+	 * @param value
+	 */
+	public Cell(int x, int y, int value)
 	{
-		this.pos = new Point(xx,yy);
-		this.value = value;
-	}
-	public void draw(Graphics g) {
-		g.setColor(Color.GRAY);
-        g.fillRect(pos.x, pos.y, CELL_WIDTH, CELL_WIDTH);
-        
-        String s = Integer.toString(value);
-        Font font = g.getFont();
-        FontRenderContext frc =  new FontRenderContext(null, true, true);
-        BufferedImage image = createImage(font, frc, CELL_WIDTH, s); 
-        g.drawImage(image, pos.x, pos.y, null);
-    }
-
-	public int getValue() {
-		return value;
-	}
-
-	public void setValue(int value) {
+		this.position = new Point(x,y);
 		this.value = value;
 	}
 	
+	/**
+	 * Draws the cell, if value == 0 , empty grey box is drawn. 
+	 * Else the value as a string is drawn, plus the color coresponding
+	 * @param g
+	 */
+	public void draw(Graphics g) {
+		if (value == 0) {
+            g.setColor(Color.GRAY);
+            g.fillRect(position.x, position.y, CELL_WIDTH, CELL_WIDTH);
+        } else {
+	        String s = Integer.toString(value);
+	        Font font = g.getFont();
+	        FontRenderContext frc =  new FontRenderContext(null, true, true);
+	        BufferedImage image = createImage(font, frc, CELL_WIDTH, s); 
+	        g.drawImage(image, position.x, position.y, null);
+        }
+    }
+
+	/**
+	 *  Creates the image inside the cell (color + value)
+	 *  s: value as a string
+	 *  
+	 * @param font
+	 * @param frc
+	 * @param width
+	 * @param s
+	 * @return
+	 */
 	private BufferedImage createImage(Font font, FontRenderContext frc,
             int width, String s) {
  
@@ -65,6 +84,30 @@ public class Cell {
         gg.dispose();
         return image;
     }
+	
+	public int getValue() {
+		return value;
+	}
+
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public Color getValueColor() {
+		return ValueColor;
+	}
+
+	public void setValueColor(Color valueColor) {
+		ValueColor = valueColor;
+	}
+	
+	public Point getPosition() {
+		return position;
+	}
+
+	public void setPosition(Point position) {
+		this.position = position;
+	}
 }
 	
 

@@ -2,8 +2,10 @@ package pp.nio;
 
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import game2048.model.Game2048Model;
 
@@ -11,7 +13,7 @@ public class EchoWorker implements Runnable {
 	
 	private List<ServerDataEvent> queue = new LinkedList<ServerDataEvent>();
 	
-	private ArrayList<Game2048Model> games = new ArrayList<Game2048Model>();
+	private Map<Integer, Game2048Model> games = new HashMap<Integer, Game2048Model>();
 	  
 	  public void processData(NioServer server, SocketChannel socket, byte[] data, int count) {
 	    byte[] dataCopy = new byte[count];
@@ -58,7 +60,7 @@ public class EchoWorker implements Runnable {
 	      case Protocol.INIT :
 	    	  System.out.println("Server received $> " + command);
 	    	  
-	    	  games.add(Integer.valueOf(idCLient), new Game2048Model());
+	    	  games.put(Integer.valueOf(idCLient), new Game2048Model());
 	    	  clientGame = games.get(Integer.valueOf(idCLient));
 	    	  
 	    	  dataEvent.server.send(dataEvent.socket, (Protocol.INIT_OK + ":" + command).getBytes());

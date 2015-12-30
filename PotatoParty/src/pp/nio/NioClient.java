@@ -153,11 +153,11 @@ public class NioClient implements Runnable {
 		}
 
 		// Handle the response
-		this.handleResponse(socketChannel, this.readBuffer.array(), numRead, this.gridPanel.getModel());
+		this.handleResponse(socketChannel, this.readBuffer.array(), numRead, this.gridPanel.getModel(), this.gridPanel);
 	}
 
 	private void handleResponse(SocketChannel socketChannel, byte[] data,
-			int numRead, Game2048Model gm) throws IOException {
+			int numRead, Game2048Model gm, GridPanel gp) throws IOException {
 		// Make a correctly sized copy of the data before handing it
 		// to the client
 		byte[] rspData = new byte[numRead];
@@ -167,7 +167,7 @@ public class NioClient implements Runnable {
 		RspHandler handler = (RspHandler) this.rspHandlers.get(socketChannel);
 
 		// And pass the response to it
-		handler.handleResponse(rspData , gm);
+		handler.handleResponse(rspData , gm, gp);
 		// The handler has seen enough, close the connection
 		// socketChannel.close();
 		// socketChannel.keyFor(this.selector).cancel();

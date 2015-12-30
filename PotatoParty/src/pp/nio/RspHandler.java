@@ -1,12 +1,15 @@
 package pp.nio;
 
 import test.Game2048Model;
+import test.GridPanel;
 
 public class RspHandler {
 	private byte[] rsp = null;
 	private Game2048Model gm = null;
+	private GridPanel gp = null;
 
-	public synchronized boolean handleResponse(byte[] rsp, Game2048Model gm) {
+	public synchronized boolean handleResponse(byte[] rsp, Game2048Model gm, GridPanel gp) {
+		this.gp = gp;
 		this.gm = gm;
 		this.rsp = rsp;
 		this.notify();
@@ -105,7 +108,7 @@ public class RspHandler {
             }
 		}   
 	
-		
+		this.gp.repaint();
 		
 		
 	}
@@ -131,6 +134,8 @@ public class RspHandler {
             	System.out.println(this.gm.getCell(x, y).getValue());
             }
 		}
+		
+		this.gp.repaint();
 	}
 	
 	public void down(String[] cells)
@@ -155,6 +160,7 @@ public class RspHandler {
             }
 		}
 		
+		this.gp.repaint();
 	}
 	
 	public void left(String[] cells)
@@ -179,6 +185,7 @@ public class RspHandler {
             }
 		}
 		
+		this.gp.repaint();
 	}
 	
 	public void right(String[] cells)
@@ -203,5 +210,6 @@ public class RspHandler {
             }
 		}
 		
+		this.gp.repaint();
 	}
 }

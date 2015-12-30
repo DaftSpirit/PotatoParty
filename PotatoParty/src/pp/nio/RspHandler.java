@@ -112,20 +112,96 @@ public class RspHandler {
 	
 	public void up(String[] cells)
 	{
+		for(int i = 0; i < cells.length ; i = i +2)
+		{
+				System.out.println(cells[i]);
+		}	
+		
+		int i = 0;
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
+            	i = i+2;
+            }
+		}   
+		
+		System.out.println("---------------------------");
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	System.out.println(this.gm.getCell(x, y).getValue());
+            }
+		}
 	}
 	
 	public void down(String[] cells)
 	{
+		for(int i = 0; i < cells.length ; i = i +2)
+		{
+				System.out.println(cells[i]);
+		}	
+		
+		int i = 0;
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
+            	i = i+2;
+            }
+		}   
+		
+		System.out.println("---------------------------");
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	System.out.println(this.gm.getCell(x, y).getValue());
+            }
+		}
 		
 	}
 	
 	public void left(String[] cells)
 	{
+		for(int i = 0; i < cells.length ; i = i +2)
+		{
+				System.out.println(cells[i]);
+		}	
+		
+		int i = 0;
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
+            	i = i+2;
+            }
+		}   
+		
+		System.out.println("---------------------------");
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	System.out.println(this.gm.getCell(x, y).getValue());
+            }
+		}
 		
 	}
 	
 	public void right(String[] cells)
 	{
+		for(int i = 0; i < cells.length ; i = i +2)
+		{
+				System.out.println(cells[i]);
+		}	
+		
+		int i = 0;
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
+            	i = i+2;
+            }
+		}   
+		
+		System.out.println("---------------------------");
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	System.out.println(this.gm.getCell(x, y).getValue());
+            }
+		}
 		
 	}
 }

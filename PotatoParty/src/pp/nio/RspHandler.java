@@ -91,12 +91,11 @@ public class RspHandler {
 			
 			for (int x = 0; x < gm.getSize(); x++) {
 	            for (int y = 0; y < gm.getSize(); y++) {
-	            	System.out.println(gm);
-	            	this.gm.getCell(x, y).setValue(Integer.getInteger(cells[i]));
+	            	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
 	            }
 			}   
 		}
-		
+		System.out.println("---------------------------");
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
             	System.out.println(this.gm.getCell(x, y).getValue());

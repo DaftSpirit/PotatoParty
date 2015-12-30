@@ -97,12 +97,21 @@ public class EchoWorker implements Runnable {
 				System.out.println("Server received $> " + command);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				clientGame.moveCellsUp();
-				System.out.println("cmd UP to game : " + clientGame);
+				
+	            if (clientGame.moveCellsUp()) {
+	                if (clientGame.isGameOver()) {
+	                	clientGame.setArrowActive(false);
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.GAME_OVER + ":").getBytes());
+	                } else {
+	                	clientGame.addNewCell();
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.HAUT_OK + ":" + getter.getCells(clientGame))
+	    								.getBytes());
+	                }
+	            }
 
-				dataEvent.server.send(dataEvent.socket,
-						(Protocol.HAUT_OK + ":" + getter.getCells(clientGame))
-								.getBytes());
+				
 				break;
 
 			case Protocol.BAS:

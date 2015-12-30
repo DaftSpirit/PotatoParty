@@ -68,9 +68,9 @@ public class RspHandler {
 			System.out.println("Pressed Right");
 			this.right(cells);
 			break;
-			
-			
 		}
+		
+		this.rsp = null;
 	}
 	
 	public void gameover()

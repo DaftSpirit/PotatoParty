@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import test.Game2048Model;
+import game2048.model.Game2048Model;
 
 public class EchoWorker implements Runnable {
 	
@@ -38,13 +38,13 @@ public class EchoWorker implements Runnable {
 	      }
 	      
 	      // message received
-	      String message = new String(dataEvent.data);
+	      String message[] = new String(dataEvent.data).split(":");
 	      
 	      //IdClient
-	      String idCLient = message;
+	      String idCLient = message[0];
 	      
 	      //command
-	      String command = message;
+	      String command = message[1];
 	      
 	      
 	      Game2048Model clientGame;
@@ -52,44 +52,56 @@ public class EchoWorker implements Runnable {
 	      /**
 	       * Arrival of command
 	       */
-	      switch(command) {
-	      case "initialize" :
+	      switch(Integer.valueOf(command)) {
+	      case Protocol.INIT :
 	    	  System.out.println("Server received $> " + command);
-	    	  //games.add(Integer.valueOf(idCLient), new Game2048Model());
-	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  
+	    	  games.add(Integer.valueOf(idCLient), new Game2048Model());
+	    	  clientGame = games.get(Integer.valueOf(idCLient));
+	    	  
+	    	  dataEvent.server.send(dataEvent.socket, (Protocol.INIT_OK + ":" + command).getBytes());
 	    	  break;
-	      case "left" :
+	      case Protocol.GAUCHE :
 	    	  System.out.println("Server received $> " + command);
-	    	  //clientGame = games.get(Integer.valueOf(idCLient));
-	    	  clientGame = null;
+	    	  
+	    	  clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame.moveCellsLeft();
+	    	  
 	    	  System.out.println("cmd LEFT to game : " + clientGame);
-	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  
+	    	  dataEvent.server.send(dataEvent.socket, (Protocol.GAUCHE_OK + ":" + command).getBytes());
 	    	  break;
-	      case "right" :
+	      case Protocol.DROITE :
 	    	  System.out.println("Server received $> " + command);
-	    	  //clientGame = games.get(Integer.valueOf(idCLient));
-	    	  clientGame = null;
+	    	  
+	    	  clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame.moveCellsRight();
 	    	  System.out.println("cmd RIGHT to game : " + clientGame);
-	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  
+	    	  dataEvent.server.send(dataEvent.socket, (Protocol.DROITE_OK + ":" + command).getBytes());
 	    	  break;
-	      case "up" :
+	      case Protocol.HAUT :
 	    	  System.out.println("Server received $> " + command);
-	    	  //clientGame = games.get(Integer.valueOf(idCLient));
-	    	  clientGame = null;
+	    	  
+	    	  clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame.moveCellsUp();
 	    	  System.out.println("cmd UP to game : " + clientGame);
-	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  
+	    	  dataEvent.server.send(dataEvent.socket, (Protocol.HAUT_OK + ":" + command).getBytes());
 	    	  break;
-	      case "down" :
+	      case Protocol.BAS :
 	    	  System.out.println("Server received $> " + command);
-	    	  //clientGame = games.get(Integer.valueOf(idCLient));
-	    	  clientGame = null;
-	    	  System.out.println("cmd UP to game : " + clientGame);
-	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  
+	    	  clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame.moveCellsDown();
+	    	  System.out.println("cmd DOWN to game : " + clientGame);
+	    	  
+	    	  dataEvent.server.send(dataEvent.socket, (Protocol.BAS_OK + ":" + command).getBytes());
 	    	  break;
 	      }
 	   
 	      
-	      //dataEvent.server.send(dataEvent.socket, "update GRID !".getBytes());
+	      dataEvent.server.send(dataEvent.socket, dataEvent.data);
 	    }
 	  }
 

@@ -276,12 +276,19 @@ public class NioClient implements Runnable {
 					System.in));
 			System.out.print("client -> string to send : ");
 			// TRICHE
-			String strLISTENER = listener.getRequest();
-			String strSend = keyboard.readLine();
-			System.out.println(strLISTENER);
+			while(true)
+			{
+				if (listener.isDownPressed()) client.send("1337:30".getBytes(), handler); handler.waitForResponse();
+				if (listener.isUpPressed()) client.send("1337:40".getBytes(), handler); handler.waitForResponse();
+				if (listener.isLeftPressed()) client.send("1337:50".getBytes(), handler); handler.waitForResponse();
+				if (listener.isRightPressed()) client.send("1337:60".getBytes(), handler); handler.waitForResponse();
+			}
+			//String strLISTENER = listener.getRequest();
+			//String strSend = keyboard.readLine();
+			//System.out.println(strLISTENER);
 			
-			client.send(strLISTENER.getBytes(), handler);
-			handler.waitForResponse();
+			//client.send(strSend.getBytes(), handler);
+			//handler.waitForResponse();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

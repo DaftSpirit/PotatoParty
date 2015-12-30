@@ -37,6 +37,8 @@ public class EchoWorker implements Runnable {
 	        dataEvent = (ServerDataEvent) queue.remove(0);
 	      }
 	      
+	      System.out.println("Server Received $> " + new String(dataEvent.data));
+	      
 	      // message received
 	      String message[] = new String(dataEvent.data).split(":");
 	      

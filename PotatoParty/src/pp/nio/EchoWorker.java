@@ -61,6 +61,7 @@ public class EchoWorker implements Runnable {
 
 				games.put(Integer.valueOf(idCLient), new Game2048Model());
 				clientGame = games.get(Integer.valueOf(idCLient));
+				clientGame.initializeGrid();
 
 				dataEvent.server.send(dataEvent.socket,
 						(Protocol.INIT_OK + ":" + getter.getCells(clientGame))

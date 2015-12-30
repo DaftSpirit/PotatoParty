@@ -37,14 +37,21 @@ public class EchoWorker implements Runnable {
 	        dataEvent = (ServerDataEvent) queue.remove(0);
 	      }
 	      
-	      // Return to sender
+	      // message received
 	      String message = new String(dataEvent.data);
-	      //System.out.println("Server received $> " + message);
 	      
+	      //IdClient
 	      String idCLient = message;
+	      
+	      //command
 	      String command = message;
+	      
+	      
 	      Game2048Model clientGame;
 	      
+	      /**
+	       * Arrival of command
+	       */
 	      switch(command) {
 	      case "initialize" :
 	    	  System.out.println("Server received $> " + command);

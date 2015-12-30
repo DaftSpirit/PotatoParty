@@ -79,7 +79,7 @@ public class Cell {
         int y = (width / 2) - (rHeight / 2) - rY;
          
         gg.setFont(largeFont);
-        gg.setColor(Color.BLACK);
+        gg.setColor(this.ValueColor);
         gg.drawString(s, x, y);
         gg.dispose();
         return image;

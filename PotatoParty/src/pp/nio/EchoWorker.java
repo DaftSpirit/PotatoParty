@@ -39,13 +39,50 @@ public class EchoWorker implements Runnable {
 	      
 	      // Return to sender
 	      String message = new String(dataEvent.data);
-	      System.out.println("Server received $> " + message);
+	      //System.out.println("Server received $> " + message);
 	      
-	      if(message.equals("initialize")) {
-	    	  games.add(new Game2048Model());
+	      String idCLient = message;
+	      String command = message;
+	      Game2048Model clientGame;
+	      
+	      switch(command) {
+	      case "initialize" :
+	    	  System.out.println("Server received $> " + command);
+	    	  //games.add(Integer.valueOf(idCLient), new Game2048Model());
+	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  break;
+	      case "left" :
+	    	  System.out.println("Server received $> " + command);
+	    	  //clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame = null;
+	    	  System.out.println("cmd LEFT to game : " + clientGame);
+	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  break;
+	      case "right" :
+	    	  System.out.println("Server received $> " + command);
+	    	  //clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame = null;
+	    	  System.out.println("cmd RIGHT to game : " + clientGame);
+	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  break;
+	      case "up" :
+	    	  System.out.println("Server received $> " + command);
+	    	  //clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame = null;
+	    	  System.out.println("cmd UP to game : " + clientGame);
+	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  break;
+	      case "down" :
+	    	  System.out.println("Server received $> " + command);
+	    	  //clientGame = games.get(Integer.valueOf(idCLient));
+	    	  clientGame = null;
+	    	  System.out.println("cmd UP to game : " + clientGame);
+	    	  dataEvent.server.send(dataEvent.socket, ("What you did : " + command).getBytes());
+	    	  break;
 	      }
+	   
 	      
-	      dataEvent.server.send(dataEvent.socket, "update GRID !".getBytes());
+	      //dataEvent.server.send(dataEvent.socket, "update GRID !".getBytes());
 	    }
 	  }
 

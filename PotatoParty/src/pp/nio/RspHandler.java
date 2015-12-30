@@ -42,22 +42,22 @@ public class RspHandler {
 	
 		case Protocol.HAUT_OK:
 			System.out.println("Pressed Up");
-			this.up(grid);
+			//this.up(grid);
 			break;
 			
 		case Protocol.BAS_OK:
 			System.out.println("Pressed Down");
-			this.down(grid);
+			//this.down(grid);
 			break;
 			
 		case Protocol.GAUCHE_OK:
 			System.out.println("Pressed Left");
-			this.left(grid);
+			//this.left(grid);
 			break;
 			
 		case Protocol.DROITE_OK:
 			System.out.println("Pressed Right");
-			this.right(grid);
+			//this.right(grid);
 			break;
 			
 			

@@ -12,7 +12,16 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
 import java.util.*;
 
+import javax.swing.JFrame;
+
+import test.GridPanel;
+import test.MyKeyListener;
+
 public class NioClient implements Runnable {
+	
+	// The 2048 View
+	private static GridPanel gridPanel;
+
 	// The host:port combination to connect to
 	private InetAddress hostAddress;
 	private int port;
@@ -235,6 +244,25 @@ public class NioClient implements Runnable {
 	}
 
 	public static void main(String[] args) {
+		/* Frame */
+		JFrame frame = new JFrame();
+		
+		MyKeyListener listener = new MyKeyListener();
+		frame.addKeyListener(listener);
+
+		frame.setSize(800, 800);
+		frame.setResizable(false);
+		frame.setLocation(100, 100);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		gridPanel = new GridPanel();
+        frame.add(gridPanel);
+        
+		
+		frame.setVisible(true);
+		
+		// ------------------------------
+		
 		try {
 			NioClient client = new NioClient(
 					InetAddress.getByName("localhost"), 9090);
@@ -247,9 +275,12 @@ public class NioClient implements Runnable {
 			BufferedReader keyboard = new BufferedReader(new InputStreamReader(
 					System.in));
 			System.out.print("client -> string to send : ");
+			// TRICHE
+			String strLISTENER = listener.getRequest();
 			String strSend = keyboard.readLine();
-
-			client.send(strSend.getBytes(), handler);
+			System.out.println(strLISTENER);
+			
+			client.send(strLISTENER.getBytes(), handler);
 			handler.waitForResponse();
 		} catch (Exception e) {
 			e.printStackTrace();

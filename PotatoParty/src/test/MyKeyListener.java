@@ -10,6 +10,8 @@ public class MyKeyListener implements KeyListener {
 	private boolean leftPressed;
 	private boolean rightPressed;
 	
+	private String request;
+	
 	public MyKeyListener() {
 		this.upPressed = false;
 		this.downPressed = false;
@@ -20,10 +22,10 @@ public class MyKeyListener implements KeyListener {
 	
 	public void keyPressed(KeyEvent e) {
 		System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Haut")) setUpPressed(true); 
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Bas")) setDownPressed(true);
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setRightPressed(true);
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setLeftPressed(true);
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Haut")) setUpPressed(true); this.request = "1337:30"; System.out.println(request);
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Bas")) setDownPressed(true); this.request = "1337:40";
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setRightPressed(true); this.request = "1337:50";
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setLeftPressed(true); this.request = "1337:60";
 	}
 			   
 	public void keyReleased(KeyEvent e) {
@@ -87,6 +89,11 @@ public class MyKeyListener implements KeyListener {
 
 	public void setLeftPressed(boolean leftPressed) {
 		this.leftPressed = leftPressed;
+	}
+
+
+	public String getRequest() {
+		return this.request;
 	}
 
 }

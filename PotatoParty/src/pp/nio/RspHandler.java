@@ -20,11 +20,16 @@ public class RspHandler {
 		/* TRAITEMENT DE LA REPONSE DU SERVEUR */
 		
 		String str = new String(this.rsp);
-		//String grid = res.replace("[0-9]", ""); REGEX qui sépare le protocole de la grille 
-		int res = Integer.valueOf(str);
-		System.out.println(res);
+		System.out.println(str);
 		
-		switch(res) {
+		String cmd[]=str.split(":");
+		System.out.println(cmd[0]);
+		System.out.println(cmd[1]);
+		int type = Integer.valueOf(cmd[0]);
+		
+		String cells[] = cmd[1].split("|");
+
+		switch(type) {
 		case Protocol.GAME_OVER:
 			System.out.println("You've Lost");
 			this.gameover();
@@ -37,27 +42,27 @@ public class RspHandler {
 			
 		case Protocol.INIT_OK:
 			System.out.println("Initialized..");
-			this.init();
+			this.init(cells);
 			break;
 	
 		case Protocol.HAUT_OK:
 			System.out.println("Pressed Up");
-			//this.up(grid);
+			this.up(cells);
 			break;
 			
 		case Protocol.BAS_OK:
 			System.out.println("Pressed Down");
-			//this.down(grid);
+			this.down(cells);
 			break;
 			
 		case Protocol.GAUCHE_OK:
 			System.out.println("Pressed Left");
-			//this.left(grid);
+			this.left(cells);
 			break;
 			
 		case Protocol.DROITE_OK:
 			System.out.println("Pressed Right");
-			//this.right(grid);
+			this.right(cells);
 			break;
 			
 			
@@ -74,27 +79,29 @@ public class RspHandler {
 		
 	}
 	
-	public void init()
+	public void init(String[] cells)
+	{
+		for(int i = 0; i < cells.length ; i++)
+		{
+			System.out.println(cells[i]);
+		}
+	}
+	
+	public void up(String[] cells)
+	{
+	}
+	
+	public void down(String[] cells)
 	{
 		
 	}
 	
-	public void up(String grid)
-	{
-		//model.update(grid);
-	}
-	
-	public void down(String grid)
+	public void left(String[] cells)
 	{
 		
 	}
 	
-	public void left(String grid)
-	{
-		
-	}
-	
-	public void right(String grid)
+	public void right(String[] cells)
 	{
 		
 	}

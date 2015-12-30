@@ -22,5 +22,10 @@ public class GridPanel extends JPanel {
         model.draw(g);
     }
 	
+	public Game2048Model getModel()
+	{
+		return this.model;
+	}
+	
 	
 }

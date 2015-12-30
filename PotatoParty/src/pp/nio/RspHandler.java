@@ -1,9 +1,13 @@
 package pp.nio;
 
+import test.Game2048Model;
+
 public class RspHandler {
 	private byte[] rsp = null;
+	private Game2048Model gm = null;
 
-	public synchronized boolean handleResponse(byte[] rsp) {
+	public synchronized boolean handleResponse(byte[] rsp, Game2048Model gm) {
+		this.gm = gm;
 		this.rsp = rsp;
 		this.notify();
 		return true;
@@ -81,10 +85,27 @@ public class RspHandler {
 	
 	public void init(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i++)
+		for(int i = 0; i < cells.length ; i = i +2)
 		{
-			System.out.println(cells[i]);
+				System.out.println(cells[i]);
+			
+			for (int x = 0; x < gm.getSize(); x++) {
+	            for (int y = 0; y < gm.getSize(); y++) {
+	            	System.out.println(gm);
+	            	this.gm.getCell(x, y).setValue(Integer.getInteger(cells[i]));
+	            }
+			}   
 		}
+		
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	System.out.println(this.gm.getCell(x, y).getValue());
+            }
+		}   
+	
+		
+		
+		
 	}
 	
 	public void up(String[] cells)

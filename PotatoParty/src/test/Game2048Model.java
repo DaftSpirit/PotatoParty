@@ -50,4 +50,14 @@ public class Game2048Model {
             }
         }
     }
+	
+	
+	public Cell getCell(int x,int y)
+	{
+		return grid[x][y];
+	}
+	
+	public int getSize(){
+		return this.GRID_SIZE;
+	}
 }

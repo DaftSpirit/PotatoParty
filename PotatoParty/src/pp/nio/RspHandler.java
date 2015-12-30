@@ -20,9 +20,10 @@ public class RspHandler {
 		/* TRAITEMENT DE LA REPONSE DU SERVEUR */
 		
 		String str = new String(this.rsp);
+		//String grid = res.replace("[0-9]", ""); REGEX qui sépare le protocole de la grille 
 		int res = Integer.valueOf(str);
 		System.out.println(res);
-		//String cmd = res.replaceAll("[0-9]", ""); Pas besoin de regex ?
+		
 		switch(res) {
 		case Protocol.GAME_OVER:
 			System.out.println("You've Lost");
@@ -41,25 +42,60 @@ public class RspHandler {
 	
 		case Protocol.HAUT_OK:
 			System.out.println("Pressed Up");
-			this.up();
+			this.up(grid);
 			break;
 			
 		case Protocol.BAS_OK:
 			System.out.println("Pressed Down");
-			this.down();
+			this.down(grid);
 			break;
 			
 		case Protocol.GAUCHE_OK:
 			System.out.println("Pressed Left");
-			this.left();
+			this.left(grid);
 			break;
 			
 		case Protocol.DROITE_OK:
 			System.out.println("Pressed Right");
-			this.right();
+			this.right(grid);
 			break;
 			
 			
 		}
+	}
+	
+	public void gameover()
+	{
+		
+	}
+	
+	public void win()
+	{
+		
+	}
+	
+	public void init()
+	{
+		
+	}
+	
+	public void up(String grid)
+	{
+		//model.update(grid);
+	}
+	
+	public void down(String grid)
+	{
+		
+	}
+	
+	public void left(String grid)
+	{
+		
+	}
+	
+	public void right(String grid)
+	{
+		
 	}
 }

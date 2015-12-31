@@ -90,6 +90,10 @@ public class EchoWorker implements Runnable {
 									(Protocol.GAUCHE_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
+					}else {
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.GAUCHE_KO + ":" + getter
+										.getCells(clientGame)).getBytes());
 					}
 				}
 
@@ -116,6 +120,10 @@ public class EchoWorker implements Runnable {
 									(Protocol.DROITE_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
+					}else {
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.DROITE_KO + ":" + getter
+										.getCells(clientGame)).getBytes());
 					}
 				}
 
@@ -142,6 +150,10 @@ public class EchoWorker implements Runnable {
 									(Protocol.HAUT_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
+					}else {
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.HAUT_KO + ":" + getter
+										.getCells(clientGame)).getBytes());
 					}
 				}
 
@@ -166,6 +178,10 @@ public class EchoWorker implements Runnable {
 									(Protocol.BAS_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
+					}else {
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.BAS_KO + ":" + getter
+										.getCells(clientGame)).getBytes());
 					}
 				}
 				break;

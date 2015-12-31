@@ -13,7 +13,7 @@ public class Cell {
 	
 	
 	private int value;
-	private Color ValueColor = Color.PINK;
+	private Color ValueColor = Color.BLACK;
 
 	private Point position;
 

@@ -34,7 +34,7 @@ public class RspHandler {
 		System.out.println(cmd[1]);
 		int type = Integer.valueOf(cmd[0]);
 		
-		String cells[] = cmd[1].split("|");
+		String cells[] = cmd[1].split("-");
 
 		switch(type) {
 		case Protocol.GAME_OVER:
@@ -88,7 +88,7 @@ public class RspHandler {
 	
 	public void init(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i = i +2)
+		for(int i = 0; i < cells.length ; i++)
 		{
 				System.out.println(cells[i]);
 		}	
@@ -97,7 +97,7 @@ public class RspHandler {
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
-            	i = i+2;
+            	i++;
             }
 		}   
 		
@@ -115,7 +115,7 @@ public class RspHandler {
 	
 	public void up(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i = i +2)
+		for(int i = 0; i < cells.length ; i++)
 		{
 				System.out.println(cells[i]);
 		}	
@@ -124,7 +124,7 @@ public class RspHandler {
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
-            	i = i+2;
+            	i++;
             }
 		}   
 		
@@ -133,14 +133,14 @@ public class RspHandler {
             for (int y = 0; y < gm.getSize(); y++) {
             	System.out.println(this.gm.getCell(x, y).getValue());
             }
-		}
-		
+		}   
+	
 		this.gp.repaint();
 	}
 	
 	public void down(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i = i +2)
+		for(int i = 0; i < cells.length ; i++)
 		{
 				System.out.println(cells[i]);
 		}	
@@ -149,7 +149,7 @@ public class RspHandler {
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
-            	i = i+2;
+            	i++;
             }
 		}   
 		
@@ -158,14 +158,14 @@ public class RspHandler {
             for (int y = 0; y < gm.getSize(); y++) {
             	System.out.println(this.gm.getCell(x, y).getValue());
             }
-		}
-		
+		}   
+	
 		this.gp.repaint();
 	}
 	
 	public void left(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i = i +2)
+		for(int i = 0; i < cells.length ; i++)
 		{
 				System.out.println(cells[i]);
 		}	
@@ -174,7 +174,7 @@ public class RspHandler {
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
-            	i = i+2;
+            	i++;
             }
 		}   
 		
@@ -183,14 +183,14 @@ public class RspHandler {
             for (int y = 0; y < gm.getSize(); y++) {
             	System.out.println(this.gm.getCell(x, y).getValue());
             }
-		}
-		
+		}   
+	
 		this.gp.repaint();
 	}
 	
 	public void right(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i = i +2)
+		for(int i = 0; i < cells.length ; i++)
 		{
 				System.out.println(cells[i]);
 		}	
@@ -199,7 +199,7 @@ public class RspHandler {
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
-            	i = i+2;
+            	i++;
             }
 		}   
 		
@@ -208,8 +208,8 @@ public class RspHandler {
             for (int y = 0; y < gm.getSize(); y++) {
             	System.out.println(this.gm.getCell(x, y).getValue());
             }
-		}
-		
+		}   
+	
 		this.gp.repaint();
 	}
 }

@@ -42,7 +42,7 @@ public class Game2048Model {
      * @param g
      */
 	public void draw(Graphics g) {
-        g.setColor(Color.RED);
+        g.setColor(Color.DARK_GRAY);
         g.fillRect(10, 10, GRID_WIDTH, GRID_LENGTH);
         for (int x = 0; x < GRID_SIZE; x++) {
             for (int y = 0; y < GRID_SIZE; y++) {

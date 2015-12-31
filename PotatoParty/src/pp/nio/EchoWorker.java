@@ -163,15 +163,11 @@ public class EchoWorker implements Runnable {
 						} else {
 							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
-									(Protocol.HAUT_OK + ":" + getter
+									(Protocol.BAS_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
 					}
 				}
-
-				dataEvent.server.send(dataEvent.socket,
-						(Protocol.BAS_OK + ":" + getter.getCells(clientGame))
-								.getBytes());
 				break;
 
 			default:

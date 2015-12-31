@@ -71,7 +71,7 @@ public class EchoWorker implements Runnable {
 				break;
 
 			case Protocol.GAUCHE:
-				System.out.println("Server received $> " + command);
+				System.out.println("Server received $> " + command + "from : " + idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				
@@ -93,7 +93,7 @@ public class EchoWorker implements Runnable {
 				break;
 
 			case Protocol.DROITE:
-				System.out.println("Server received $> " + command);
+				System.out.println("Server received $> " + command + "from : " + idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				
@@ -115,7 +115,7 @@ public class EchoWorker implements Runnable {
 				break;
 
 			case Protocol.HAUT:
-				System.out.println("Server received $> " + command);
+				System.out.println("Server received $> " + command + "from : " + idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				
@@ -136,7 +136,7 @@ public class EchoWorker implements Runnable {
 				break;
 
 			case Protocol.BAS:
-				System.out.println("Server received $> " + command);
+				System.out.println("Server received $> " + command + "from : " + idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				

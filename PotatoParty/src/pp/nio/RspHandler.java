@@ -1,5 +1,8 @@
 package pp.nio;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 import test.Game2048Model;
 import test.GridPanel;
 
@@ -100,11 +103,13 @@ public class RspHandler {
 	
 	public void gameover()
 	{
+		gp.add(new JLabel(new ImageIcon("res/keepo.png")));
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
+		this.gp.repaint();
 	}
 	
 	public void win()

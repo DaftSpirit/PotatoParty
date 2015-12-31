@@ -22,6 +22,7 @@ import test.MyKeyListener;
 
 public class NioClient implements Runnable {
 	
+	
 	// The Id of the client
 	private static int ID;
 	
@@ -270,9 +271,10 @@ public class NioClient implements Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		gridPanel = new GridPanel();
+		gridPanel.add(new JLabel(new ImageIcon("res/potato.gif")));
         frame.add(gridPanel);
         
-        //frame.add(new JLabel(new ImageIcon("res/potato.gif")));
+        
         
 		
 		frame.setVisible(true);

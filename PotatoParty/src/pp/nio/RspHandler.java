@@ -26,16 +26,11 @@ public class RspHandler {
 		
 		/* TRAITEMENT DE LA REPONSE DU SERVEUR */
 		
-		String str = new String(this.rsp);
-		System.out.println(str);
-		
+		String str = new String(this.rsp);		
 		String cmd[]=str.split(":");
-		System.out.println(cmd[0]);
-		System.out.println(cmd[1]);
-		int type = Integer.valueOf(cmd[0]);
-		
 		String cells[] = cmd[1].split("-");
 
+		int type = Integer.valueOf(cmd[0]);
 		switch(type) {
 		case Protocol.GAME_OVER:
 			System.out.println("You've Lost");
@@ -123,38 +118,18 @@ public class RspHandler {
 	
 	public void init(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i++)
-		{
-				System.out.println(cells[i]);
-		}	
-		
 		int i = 0;
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
             	i++;
             }
-		}   
-		
-		System.out.println("---------------------------");
-		for (int x = 0; x < gm.getSize(); x++) {
-            for (int y = 0; y < gm.getSize(); y++) {
-            	System.out.println(this.gm.getCell(x, y).getValue());
-            }
-		}   
-	
+		}   	
 		this.gp.repaint();
-		
-		
 	}
 	
 	public void up(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i++)
-		{
-				System.out.println(cells[i]);
-		}	
-		
 		int i = 0;
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
@@ -162,24 +137,11 @@ public class RspHandler {
             	i++;
             }
 		}   
-		
-		System.out.println("---------------------------");
-		for (int x = 0; x < gm.getSize(); x++) {
-            for (int y = 0; y < gm.getSize(); y++) {
-            	System.out.println(this.gm.getCell(x, y).getValue());
-            }
-		}   
-	
 		this.gp.repaint();
 	}
 	
 	public void down(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i++)
-		{
-				System.out.println(cells[i]);
-		}	
-		
 		int i = 0;
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
@@ -187,24 +149,11 @@ public class RspHandler {
             	i++;
             }
 		}   
-		
-		System.out.println("---------------------------");
-		for (int x = 0; x < gm.getSize(); x++) {
-            for (int y = 0; y < gm.getSize(); y++) {
-            	System.out.println(this.gm.getCell(x, y).getValue());
-            }
-		}   
-	
 		this.gp.repaint();
 	}
 	
 	public void left(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i++)
-		{
-				System.out.println(cells[i]);
-		}	
-		
 		int i = 0;
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
@@ -212,24 +161,11 @@ public class RspHandler {
             	i++;
             }
 		}   
-		
-		System.out.println("---------------------------");
-		for (int x = 0; x < gm.getSize(); x++) {
-            for (int y = 0; y < gm.getSize(); y++) {
-            	System.out.println(this.gm.getCell(x, y).getValue());
-            }
-		}   
-	
 		this.gp.repaint();
 	}
 	
 	public void right(String[] cells)
 	{
-		for(int i = 0; i < cells.length ; i++)
-		{
-				System.out.println(cells[i]);
-		}	
-		
 		int i = 0;
 		for (int x = 0; x < gm.getSize(); x++) {
             for (int y = 0; y < gm.getSize(); y++) {
@@ -237,14 +173,6 @@ public class RspHandler {
             	i++;
             }
 		}   
-		
-		System.out.println("---------------------------");
-		for (int x = 0; x < gm.getSize(); x++) {
-            for (int y = 0; y < gm.getSize(); y++) {
-            	System.out.println(this.gm.getCell(x, y).getValue());
-            }
-		}   
-	
 		this.gp.repaint();
 	}
 }

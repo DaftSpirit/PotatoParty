@@ -287,16 +287,15 @@ public class NioClient implements Runnable {
 			t.start();
 			RspHandler handler = new RspHandler();
 			System.out.println("Client n°"+ID+ " is running....");
-
-			// TRICHE
-			client.send((ID+":20").getBytes(), handler); System.out.println("INIT BITCH"); handler.waitForResponse();
+			client.send((ID+":20").getBytes(), handler);
+			handler.waitForResponse();
 			while(true)
 			{
 				Thread.sleep(50);
-				if (listener.isUpPressed()) { client.send((ID+":30").getBytes(), handler); System.out.println("UP PRESSED BITCH");handler.waitForResponse();}
-				if (listener.isDownPressed()) {client.send((ID+":40").getBytes(), handler); System.out.println("DOWN PRESSED BITCH"); handler.waitForResponse();}
-				if (listener.isLeftPressed()) {client.send((ID+":50").getBytes(), handler); System.out.println("LEFT PRESSED BITCH"); handler.waitForResponse();}
-				if (listener.isRightPressed()) {client.send((ID+":60").getBytes(), handler); System.out.println("RIGHT PRESSED BITCH");handler.waitForResponse();}
+				if (listener.isUpPressed()) { client.send((ID+":30").getBytes(), handler); handler.waitForResponse();}
+				if (listener.isDownPressed()) {client.send((ID+":40").getBytes(), handler);  handler.waitForResponse();}
+				if (listener.isLeftPressed()) {client.send((ID+":50").getBytes(), handler); handler.waitForResponse();}
+				if (listener.isRightPressed()) {client.send((ID+":60").getBytes(), handler); handler.waitForResponse();}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

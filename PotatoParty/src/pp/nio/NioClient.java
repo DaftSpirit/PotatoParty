@@ -1,6 +1,8 @@
 package pp.nio;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
@@ -12,6 +14,7 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
 import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -293,7 +296,7 @@ public class NioClient implements Runnable {
 			handler.waitForResponse();
 			while(true)
 			{
-				Thread.sleep(50);
+				Thread.sleep(150);
 				if (listener.isUpPressed()) { client.send((ID+":30").getBytes(), handler); handler.waitForResponse();}
 				if (listener.isDownPressed()) {client.send((ID+":40").getBytes(), handler);  handler.waitForResponse();}
 				if (listener.isLeftPressed()) {client.send((ID+":50").getBytes(), handler); handler.waitForResponse();}
@@ -303,4 +306,5 @@ public class NioClient implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	
 }

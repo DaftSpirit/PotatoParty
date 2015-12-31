@@ -10,7 +10,6 @@ public class MyKeyListener implements KeyListener {
 	private boolean leftPressed;
 	private boolean rightPressed;
 	
-	private String request;
 	
 	public MyKeyListener() {
 		this.upPressed = false;
@@ -89,11 +88,6 @@ public class MyKeyListener implements KeyListener {
 
 	public void setLeftPressed(boolean leftPressed) {
 		this.leftPressed = leftPressed;
-	}
-
-
-	public String getRequest() {
-		return this.request;
 	}
 
 }

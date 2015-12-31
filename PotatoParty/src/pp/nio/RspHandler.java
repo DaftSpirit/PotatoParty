@@ -54,7 +54,7 @@ public class RspHandler {
 			
 		case Protocol.INIT_KO:
 			System.out.println("Initialized FAILED");
-			this.gp.repaint();
+			this.init(cells);
 			break;
 	
 		case Protocol.HAUT_OK:

@@ -24,23 +24,23 @@ public class MyKeyListener implements KeyListener {
 		//System.out.println("keyPressed="+KeyEvent.getKeyText(e.getKeyCode()));
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Haut")) setUpPressed(true); 
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Bas")) setDownPressed(true); 
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setRightPressed(true); 
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setLeftPressed(true); 
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setRightPressed(true); 
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setLeftPressed(true); 
 	}
 			   
 	public void keyReleased(KeyEvent e) {
 		//System.out.println("keyReleased="+KeyEvent.getKeyText(e.getKeyCode()));
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Haut")) setUpPressed(false);
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Bas")) setDownPressed(false);
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setRightPressed(false);
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setLeftPressed(false);
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setRightPressed(false);
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setLeftPressed(false);
 	}
 
 	public void keyTyped(KeyEvent e) {
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Haut")) {setUpPressed(true); System.out.println(this.upPressed);}
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Haut")) {setUpPressed(true); }
 		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Bas")) setDownPressed(true);
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setRightPressed(true);
-		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setLeftPressed(true);
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Droite")) setRightPressed(true);
+		if(KeyEvent.getKeyText(e.getKeyCode()).equals("Gauche")) setLeftPressed(true);
 	}
 
 

@@ -62,6 +62,7 @@ public class EchoWorker implements Runnable {
 				games.put(Integer.valueOf(idCLient), new Game2048Model());
 				clientGame = games.get(Integer.valueOf(idCLient));
 				clientGame.initializeGrid();
+				clientGame.setArrowActive(true);
 				clientGame.addNewCell();
 				clientGame.addNewCell();
 
@@ -71,87 +72,98 @@ public class EchoWorker implements Runnable {
 				break;
 
 			case Protocol.GAUCHE:
-				System.out.println("Server received $> " + command + "from : " + idCLient);
+				System.out.println("Server received $> " + command + "from : "
+						+ idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				
-				if (clientGame.moveCellsRight()) {
-	                if (clientGame.isGameOver()) {
-	                	clientGame.setArrowActive(false);
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
-	                } else {
-	                	clientGame.addNewCell();
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.GAUCHE_OK + ":" + getter.getCells(clientGame))
-	    								.getBytes());
-	                }
-	            }
+				if (clientGame.isArrowActive()) {
+					if (clientGame.moveCellsRight()) {
+						if (clientGame.isGameOver()) {
+							clientGame.setArrowActive(false);
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.GAME_OVER + ":" + getter
+											.getCells(clientGame)).getBytes());
+						} else {
+							clientGame.addNewCell();
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.GAUCHE_OK + ":" + getter
+											.getCells(clientGame)).getBytes());
+						}
+					}
+				}
 
 				dataEvent.server.send(dataEvent.socket, (Protocol.GAUCHE_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
 				break;
 
 			case Protocol.DROITE:
-				System.out.println("Server received $> " + command + "from : " + idCLient);
+				System.out.println("Server received $> " + command + "from : "
+						+ idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				
-				if (clientGame.moveCellsLeft()) {
-	                if (clientGame.isGameOver()) {
-	                	clientGame.setArrowActive(false);
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
-	                } else {
-	                	clientGame.addNewCell();
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.DROITE_OK + ":" + getter.getCells(clientGame))
-	    								.getBytes());
-	                }
-	            }
+				if (clientGame.isArrowActive()) {
+					if (clientGame.moveCellsLeft()) {
+						if (clientGame.isGameOver()) {
+							clientGame.setArrowActive(false);
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.GAME_OVER + ":" + getter
+											.getCells(clientGame)).getBytes());
+						} else {
+							clientGame.addNewCell();
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.DROITE_OK + ":" + getter
+											.getCells(clientGame)).getBytes());
+						}
+					}
+				}
 
 				dataEvent.server.send(dataEvent.socket, (Protocol.DROITE_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
 				break;
 
 			case Protocol.HAUT:
-				System.out.println("Server received $> " + command + "from : " + idCLient);
+				System.out.println("Server received $> " + command + "from : "
+						+ idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				
-	            if (clientGame.moveCellsUp()) {
-	                if (clientGame.isGameOver()) {
-	                	clientGame.setArrowActive(false);
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
-	                } else {
-	                	clientGame.addNewCell();
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.HAUT_OK + ":" + getter.getCells(clientGame))
-	    								.getBytes());
-	                }
-	            }
+				if (clientGame.isArrowActive()) {
+					if (clientGame.moveCellsUp()) {
+						if (clientGame.isGameOver()) {
+							clientGame.setArrowActive(false);
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.GAME_OVER + ":" + getter
+											.getCells(clientGame)).getBytes());
+						} else {
+							clientGame.addNewCell();
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.HAUT_OK + ":" + getter
+											.getCells(clientGame)).getBytes());
+						}
+					}
+				}
 
-				
 				break;
 
 			case Protocol.BAS:
-				System.out.println("Server received $> " + command + "from : " + idCLient);
+				System.out.println("Server received $> " + command + "from : "
+						+ idCLient);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				
-				if (clientGame.moveCellsDown()) {
-	                if (clientGame.isGameOver()) {
-	                	clientGame.setArrowActive(false);
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
-	                } else {
-	                	clientGame.addNewCell();
-	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.HAUT_OK + ":" + getter.getCells(clientGame))
-	    								.getBytes());
-	                }
-	            }
+				if (clientGame.isArrowActive()) {
+					if (clientGame.moveCellsDown()) {
+						if (clientGame.isGameOver()) {
+							clientGame.setArrowActive(false);
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.GAME_OVER + ":" + getter
+											.getCells(clientGame)).getBytes());
+						} else {
+							clientGame.addNewCell();
+							dataEvent.server.send(dataEvent.socket,
+									(Protocol.HAUT_OK + ":" + getter
+											.getCells(clientGame)).getBytes());
+						}
+					}
+				}
 
 				dataEvent.server.send(dataEvent.socket,
 						(Protocol.BAS_OK + ":" + getter.getCells(clientGame))

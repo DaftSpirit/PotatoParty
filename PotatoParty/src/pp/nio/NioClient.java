@@ -20,6 +20,9 @@ import test.MyKeyListener;
 
 public class NioClient implements Runnable {
 	
+	// The Id of the client
+	private static int ID;
+	
 	// The 2048 View
 	private static GridPanel gridPanel;
 
@@ -245,6 +248,15 @@ public class NioClient implements Runnable {
 	}
 
 	public static void main(String[] args) {
+		
+		/* ID generation */
+		
+		Random r = new Random();
+		int Low = 1;
+		int High = 10000;
+		ID = r.nextInt(High-Low) + Low;
+		System.out.println(ID);
+		
 		/* Frame */
 		JFrame frame = new JFrame();
 		
@@ -271,21 +283,17 @@ public class NioClient implements Runnable {
 			t.setDaemon(true);
 			t.start();
 			RspHandler handler = new RspHandler();
-			System.out.println("Client Running....");
+			System.out.println("Client n°"+ID+ " is running....");
 
-			BufferedReader keyboard = new BufferedReader(new InputStreamReader(
-					System.in));
-			System.out.print("client -> string to send : ");
 			// TRICHE
-			client.send("1337:20".getBytes(), handler); System.out.println("INIT BITCH"); handler.waitForResponse();
+			client.send((ID+":20").getBytes(), handler); System.out.println("INIT BITCH"); handler.waitForResponse();
 			while(true)
 			{
-				Thread.sleep(2000);
-				System.out.println("BOUCLE");
-				if (listener.isUpPressed()) { client.send("1337:30".getBytes(), handler); System.out.println("UP PRESSED BITCH");handler.waitForResponse();}
-				if (listener.isDownPressed()) {client.send("1337:40".getBytes(), handler); System.out.println("DOWN PRESSED BITCH"); handler.waitForResponse();}
-				if (listener.isLeftPressed()) {client.send("1337:50".getBytes(), handler); System.out.println("LEFT PRESSED BITCH"); handler.waitForResponse();}
-				if (listener.isRightPressed()) {client.send("1337:60".getBytes(), handler); System.out.println("RIGHT PRESSED BITCH");handler.waitForResponse();}
+				Thread.sleep(100);
+				if (listener.isUpPressed()) { client.send((ID+":30").getBytes(), handler); System.out.println("UP PRESSED BITCH");handler.waitForResponse();}
+				if (listener.isDownPressed()) {client.send((ID+":40").getBytes(), handler); System.out.println("DOWN PRESSED BITCH"); handler.waitForResponse();}
+				if (listener.isLeftPressed()) {client.send((ID+":50").getBytes(), handler); System.out.println("LEFT PRESSED BITCH"); handler.waitForResponse();}
+				if (listener.isRightPressed()) {client.send((ID+":60").getBytes(), handler); System.out.println("RIGHT PRESSED BITCH");handler.waitForResponse();}
 			}
 			//String strLISTENER = listener.getRequest();
 			//String strSend = keyboard.readLine();

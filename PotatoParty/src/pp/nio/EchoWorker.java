@@ -58,21 +58,19 @@ public class EchoWorker implements Runnable {
 			switch (Integer.valueOf(command)) {
 			case Protocol.INIT:
 				System.out.println("Server received $> " + command);
-				if(games.get(Integer.valueOf(idCLient)) == null) {
-				games.put(Integer.valueOf(idCLient), new Game2048Model());
-				clientGame = games.get(Integer.valueOf(idCLient));
-				clientGame.initializeGrid();
-				clientGame.setArrowActive(true);
-				clientGame.addNewCell();
-				clientGame.addNewCell();
-				
-				dataEvent.server.send(dataEvent.socket,
-						(Protocol.INIT_OK + ":" + getter.getCells(clientGame))
-								.getBytes());
+				if (games.get(Integer.valueOf(idCLient)) == null) {
+					games.put(Integer.valueOf(idCLient), new Game2048Model());
+					clientGame = games.get(Integer.valueOf(idCLient));
+					clientGame.initializeGrid();
+					clientGame.setArrowActive(true);
+					clientGame.addNewCell();
+					clientGame.addNewCell();
+
+					dataEvent.server.send(dataEvent.socket, (Protocol.INIT_OK
+							+ ":" + getter.getCells(clientGame)).getBytes());
 				} else {
-					dataEvent.server.send(dataEvent.socket,
-							(Protocol.INIT_KO + ":" + getter.get404())
-									.getBytes());
+					dataEvent.server.send(dataEvent.socket, (Protocol.INIT_KO
+							+ ":" + getter.get404()).getBytes());
 				}
 				break;
 
@@ -82,20 +80,21 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
-					
+
 					if (clientGame.moveCellsLeft()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
+							games.remove(idCLient);
 						} else {
 							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.GAUCHE_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					}else {
+					} else {
 						dataEvent.server.send(dataEvent.socket,
 								(Protocol.GAUCHE_KO + ":" + getter
 										.getCells(clientGame)).getBytes());
@@ -112,20 +111,21 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
-					
+
 					if (clientGame.moveCellsRight()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
+							games.remove(idCLient);
 						} else {
 							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.DROITE_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					}else {
+					} else {
 						dataEvent.server.send(dataEvent.socket,
 								(Protocol.DROITE_KO + ":" + getter
 										.getCells(clientGame)).getBytes());
@@ -142,20 +142,21 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
-					
+
 					if (clientGame.moveCellsUp()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
+							games.remove(idCLient);
 						} else {
 							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.HAUT_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					}else {
+					} else {
 						dataEvent.server.send(dataEvent.socket,
 								(Protocol.HAUT_KO + ":" + getter
 										.getCells(clientGame)).getBytes());
@@ -170,20 +171,21 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
-					
+
 					if (clientGame.moveCellsDown()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
+							games.remove(idCLient);
 						} else {
 							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.BAS_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					}else {
+					} else {
 						dataEvent.server.send(dataEvent.socket,
 								(Protocol.BAS_KO + ":" + getter
 										.getCells(clientGame)).getBytes());

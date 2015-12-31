@@ -16,7 +16,7 @@ public class CellGetting {
         for (int x = 0; x < GRID_SIZE; x++) {
             for (int y = 0; y < GRID_SIZE; y++) {
                 res += model.getCell(x, y).getValue();
-                res += "|";
+                res += "-";
             }
         }
 		

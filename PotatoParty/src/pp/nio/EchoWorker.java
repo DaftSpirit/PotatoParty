@@ -77,6 +77,7 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
+					clientGame.addNewCell();
 					if (clientGame.moveCellsRight()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
@@ -84,7 +85,7 @@ public class EchoWorker implements Runnable {
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
 						} else {
-							clientGame.addNewCell();
+							
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.GAUCHE_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
@@ -102,6 +103,7 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
+					clientGame.addNewCell();
 					if (clientGame.moveCellsLeft()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
@@ -109,7 +111,7 @@ public class EchoWorker implements Runnable {
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
 						} else {
-							clientGame.addNewCell();
+							
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.DROITE_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
@@ -127,6 +129,7 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
+					clientGame.addNewCell();
 					if (clientGame.moveCellsUp()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
@@ -134,7 +137,7 @@ public class EchoWorker implements Runnable {
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
 						} else {
-							clientGame.addNewCell();
+							
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.HAUT_OK + ":" + getter
 											.getCells(clientGame)).getBytes());
@@ -150,6 +153,7 @@ public class EchoWorker implements Runnable {
 
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
+					clientGame.addNewCell();
 					if (clientGame.moveCellsDown()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
@@ -157,7 +161,7 @@ public class EchoWorker implements Runnable {
 									(Protocol.GAME_OVER + ":" + getter
 											.getCells(clientGame)).getBytes());
 						} else {
-							clientGame.addNewCell();
+							
 							dataEvent.server.send(dataEvent.socket,
 									(Protocol.HAUT_OK + ":" + getter
 											.getCells(clientGame)).getBytes());

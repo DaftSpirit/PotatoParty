@@ -82,6 +82,13 @@ public class EchoWorker implements Runnable {
 				if (clientGame.isArrowActive()) {
 
 					if (clientGame.moveCellsLeft()) {
+
+						clientGame.addNewCell();
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.GAUCHE_OK + ":" + getter
+										.getCells(clientGame)).getBytes());
+
+					} else {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
@@ -89,15 +96,10 @@ public class EchoWorker implements Runnable {
 											.getCells(clientGame)).getBytes());
 							games.remove(idCLient);
 						} else {
-							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
-									(Protocol.GAUCHE_OK + ":" + getter
+									(Protocol.GAUCHE_KO + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					} else {
-						dataEvent.server.send(dataEvent.socket,
-								(Protocol.GAUCHE_KO + ":" + getter
-										.getCells(clientGame)).getBytes());
 					}
 				}
 
@@ -113,6 +115,13 @@ public class EchoWorker implements Runnable {
 				if (clientGame.isArrowActive()) {
 
 					if (clientGame.moveCellsRight()) {
+
+						clientGame.addNewCell();
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.DROITE_OK + ":" + getter
+										.getCells(clientGame)).getBytes());
+
+					} else {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
@@ -120,15 +129,10 @@ public class EchoWorker implements Runnable {
 											.getCells(clientGame)).getBytes());
 							games.remove(idCLient);
 						} else {
-							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
-									(Protocol.DROITE_OK + ":" + getter
+									(Protocol.DROITE_KO + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					} else {
-						dataEvent.server.send(dataEvent.socket,
-								(Protocol.DROITE_KO + ":" + getter
-										.getCells(clientGame)).getBytes());
 					}
 				}
 
@@ -144,6 +148,13 @@ public class EchoWorker implements Runnable {
 				if (clientGame.isArrowActive()) {
 
 					if (clientGame.moveCellsUp()) {
+
+						clientGame.addNewCell();
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.HAUT_OK + ":" + getter
+										.getCells(clientGame)).getBytes());
+
+					} else {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
@@ -151,15 +162,10 @@ public class EchoWorker implements Runnable {
 											.getCells(clientGame)).getBytes());
 							games.remove(idCLient);
 						} else {
-							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
-									(Protocol.HAUT_OK + ":" + getter
+									(Protocol.HAUT_KO + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					} else {
-						dataEvent.server.send(dataEvent.socket,
-								(Protocol.HAUT_KO + ":" + getter
-										.getCells(clientGame)).getBytes());
 					}
 				}
 
@@ -173,6 +179,13 @@ public class EchoWorker implements Runnable {
 				if (clientGame.isArrowActive()) {
 
 					if (clientGame.moveCellsDown()) {
+
+						clientGame.addNewCell();
+						dataEvent.server.send(dataEvent.socket,
+								(Protocol.BAS_OK + ":" + getter
+										.getCells(clientGame)).getBytes());
+
+					} else {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
@@ -180,15 +193,10 @@ public class EchoWorker implements Runnable {
 											.getCells(clientGame)).getBytes());
 							games.remove(idCLient);
 						} else {
-							clientGame.addNewCell();
 							dataEvent.server.send(dataEvent.socket,
-									(Protocol.BAS_OK + ":" + getter
+									(Protocol.BAS_KO + ":" + getter
 											.getCells(clientGame)).getBytes());
 						}
-					} else {
-						dataEvent.server.send(dataEvent.socket,
-								(Protocol.BAS_KO + ":" + getter
-										.getCells(clientGame)).getBytes());
 					}
 				}
 				break;

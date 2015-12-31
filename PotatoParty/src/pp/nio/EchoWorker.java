@@ -74,9 +74,19 @@ public class EchoWorker implements Runnable {
 				System.out.println("Server received $> " + command);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				clientGame.moveCellsLeft();
-
-				System.out.println("cmd LEFT to game : " + clientGame);
+				
+				if (clientGame.moveCellsRight()) {
+	                if (clientGame.isGameOver()) {
+	                	clientGame.setArrowActive(false);
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
+	                } else {
+	                	clientGame.addNewCell();
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.GAUCHE_OK + ":" + getter.getCells(clientGame))
+	    								.getBytes());
+	                }
+	            }
 
 				dataEvent.server.send(dataEvent.socket, (Protocol.GAUCHE_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
@@ -86,8 +96,19 @@ public class EchoWorker implements Runnable {
 				System.out.println("Server received $> " + command);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				clientGame.moveCellsRight();
-				System.out.println("cmd RIGHT to game : " + clientGame);
+				
+				if (clientGame.moveCellsLeft()) {
+	                if (clientGame.isGameOver()) {
+	                	clientGame.setArrowActive(false);
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
+	                } else {
+	                	clientGame.addNewCell();
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.DROITE_OK + ":" + getter.getCells(clientGame))
+	    								.getBytes());
+	                }
+	            }
 
 				dataEvent.server.send(dataEvent.socket, (Protocol.DROITE_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
@@ -102,7 +123,7 @@ public class EchoWorker implements Runnable {
 	                if (clientGame.isGameOver()) {
 	                	clientGame.setArrowActive(false);
 	                	dataEvent.server.send(dataEvent.socket,
-	    						(Protocol.GAME_OVER + ":").getBytes());
+	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
 	                } else {
 	                	clientGame.addNewCell();
 	                	dataEvent.server.send(dataEvent.socket,
@@ -118,8 +139,19 @@ public class EchoWorker implements Runnable {
 				System.out.println("Server received $> " + command);
 
 				clientGame = games.get(Integer.valueOf(idCLient));
-				clientGame.moveCellsDown();
-				System.out.println("cmd DOWN to game : " + clientGame);
+				
+				if (clientGame.moveCellsDown()) {
+	                if (clientGame.isGameOver()) {
+	                	clientGame.setArrowActive(false);
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.GAME_OVER + ":" + getter.getCells(clientGame)).getBytes());
+	                } else {
+	                	clientGame.addNewCell();
+	                	dataEvent.server.send(dataEvent.socket,
+	    						(Protocol.HAUT_OK + ":" + getter.getCells(clientGame))
+	    								.getBytes());
+	                }
+	            }
 
 				dataEvent.server.send(dataEvent.socket,
 						(Protocol.BAS_OK + ":" + getter.getCells(clientGame))

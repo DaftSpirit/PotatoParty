@@ -83,7 +83,7 @@ public class EchoWorker implements Runnable {
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
 					
-					if (clientGame.moveCellsRight()) {
+					if (clientGame.moveCellsLeft()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,
@@ -113,7 +113,7 @@ public class EchoWorker implements Runnable {
 				clientGame = games.get(Integer.valueOf(idCLient));
 				if (clientGame.isArrowActive()) {
 					
-					if (clientGame.moveCellsLeft()) {
+					if (clientGame.moveCellsRight()) {
 						if (clientGame.isGameOver()) {
 							clientGame.setArrowActive(false);
 							dataEvent.server.send(dataEvent.socket,

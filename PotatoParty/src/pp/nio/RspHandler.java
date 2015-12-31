@@ -51,10 +51,20 @@ public class RspHandler {
 			System.out.println("Initialized..");
 			this.init(cells);
 			break;
+			
+		case Protocol.INIT_KO:
+			System.out.println("Initialized FAILED");
+			this.gp.repaint();
+			break;
 	
 		case Protocol.HAUT_OK:
 			System.out.println("Pressed Up");
 			this.up(cells);
+			break;
+			
+		case Protocol.HAUT_KO:
+			System.out.println("Pressed Up, but nothing happens");
+			this.gp.repaint();
 			break;
 			
 		case Protocol.BAS_OK:
@@ -62,28 +72,53 @@ public class RspHandler {
 			this.down(cells);
 			break;
 			
+		case Protocol.BAS_KO:
+			System.out.println("Pressed Down but nothing happens");
+			this.gp.repaint();
+			break;
+			
 		case Protocol.GAUCHE_OK:
 			System.out.println("Pressed Left");
 			this.left(cells);
+			break;
+			
+		case Protocol.GAUCHE_KO:
+			System.out.println("Pressed Left but nothing happens");
+			this.gp.repaint();
 			break;
 			
 		case Protocol.DROITE_OK:
 			System.out.println("Pressed Right");
 			this.right(cells);
 			break;
+			
+		case Protocol.DROITE_KO:
+			System.out.println("Pressed Right but nothing happens");
+			this.gp.repaint();			
+			break;
 		}
+		
+		
 		
 		this.rsp = null;
 	}
 	
 	public void gameover()
 	{
-		
+		System.out.println("YOU\'VE LOST THE GAME");
+		System.out.println("YOU\'VE LOST THE GAME");
+		System.out.println("YOU\'VE LOST THE GAME");
+		System.out.println("YOU\'VE LOST THE GAME");
+		System.out.println("YOU\'VE LOST THE GAME");
 	}
 	
 	public void win()
 	{
-		
+		System.out.println("YOU\'VE WIN \\o/");
+		System.out.println("YOU\'VE WIN \\o/");
+		System.out.println("YOU\'VE WIN \\o/");
+		System.out.println("YOU\'VE WIN \\o/");
+		System.out.println("YOU\'VE WIN \\o/");
 	}
 	
 	public void init(String[] cells)

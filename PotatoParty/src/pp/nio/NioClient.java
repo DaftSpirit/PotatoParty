@@ -12,7 +12,9 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
 import java.util.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import test.Game2048Model;
 import test.GridPanel;
@@ -255,7 +257,6 @@ public class NioClient implements Runnable {
 		int Low = 1;
 		int High = 10000;
 		ID = r.nextInt(High-Low) + Low;
-		System.out.println(ID);
 		
 		/* Frame */
 		JFrame frame = new JFrame();
@@ -263,13 +264,15 @@ public class NioClient implements Runnable {
 		MyKeyListener listener = new MyKeyListener();
 		frame.addKeyListener(listener);
 
-		frame.setSize(800, 800);
+		frame.setSize(800, 585);
 		frame.setResizable(false);
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		gridPanel = new GridPanel();
         frame.add(gridPanel);
+        
+        //frame.add(new JLabel(new ImageIcon("res/potato.gif")));
         
 		
 		frame.setVisible(true);

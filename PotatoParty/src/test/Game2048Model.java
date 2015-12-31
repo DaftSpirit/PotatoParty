@@ -5,8 +5,8 @@ import java.awt.Graphics;
 
 public class Game2048Model {
 	
-	private final int GRID_WIDTH = 775;
-	private final int GRID_LENGTH = 750;
+	private final int GRID_WIDTH = 535;
+	private final int GRID_LENGTH = 535;
 			
 	private final int GRID_SIZE = 4;
 	private final int SPACE = 15;
@@ -29,7 +29,7 @@ public class Game2048Model {
         for (int x = 0; x < GRID_SIZE; x++) {
             int yy = this.SPACE;
             for (int y = 0; y < GRID_SIZE; y++) {
-                Cell cell = new Cell(xx,yy,4);
+                Cell cell = new Cell(xx,yy,1337);
                 grid[x][y] = cell;
                 yy += SPACE + Cell.CELL_WIDTH;
             }

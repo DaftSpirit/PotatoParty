@@ -13,11 +13,9 @@ public class Cell {
 	
 	
 	private int value;
-	private Color ValueColor = Color.BLACK;
-
 	private Point position;
 
-	public static final int CELL_WIDTH = 170;
+	public static final int CELL_WIDTH = 120;
 	
 	/**
 	 * Constructor which is called on instanciation of the grid.
@@ -73,16 +71,55 @@ public class Cell {
                 BufferedImage.TYPE_INT_RGB);
          
         Graphics gg = image.getGraphics();
+        gg.setColor(this.getCellColor());
         gg.fillRect(0, 0, image.getWidth(), image.getHeight());
  
         int x = (width / 2) - (rWidth / 2) - rX;
         int y = (width / 2) - (rHeight / 2) - rY;
          
         gg.setFont(largeFont);
-        gg.setColor(this.ValueColor);
+        gg.setColor(this.getTextColor());
         gg.drawString(s, x, y);
         gg.dispose();
         return image;
+    }
+	
+	
+	private Color getCellColor() {
+        Color color = Color.WHITE;
+         
+        switch (value) {
+            case 2:     color = Color.WHITE;
+                        break;
+            case 4:     color = new Color(200, 255, 255);
+                        break;
+            case 8:     color = new Color(170, 255, 255);
+                        break;
+            case 16:    color = new Color(128, 255, 255);
+                        break;
+            case 32:    color = new Color(85, 255, 255);
+                        break;
+            case 64:    color = new Color(43, 255, 255);
+                        break;
+            case 128:   color = new Color(0, 255, 255);
+                        break;
+            case 256:   color = new Color(213, 213, 0);
+                        break;
+            case 512:   color = new Color(170, 170, 0);
+                        break;
+            case 1024:  color = new Color(128, 128, 0);
+                        break;
+            case 2048:  color = new Color(85, 85, 0);
+                        break;
+            default:    color = new Color(43, 43, 0);
+                        break;
+        }
+         
+        return color;
+    }
+	
+	private Color getTextColor() {
+        return (value >= 256) ? Color.WHITE : Color.BLACK;
     }
 	
 	public int getValue() {
@@ -91,14 +128,6 @@ public class Cell {
 
 	public void setValue(int value) {
 		this.value = value;
-	}
-
-	public Color getValueColor() {
-		return ValueColor;
-	}
-
-	public void setValueColor(Color valueColor) {
-		ValueColor = valueColor;
 	}
 	
 	public Point getPosition() {

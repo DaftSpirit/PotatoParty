@@ -58,17 +58,22 @@ public class EchoWorker implements Runnable {
 			switch (Integer.valueOf(command)) {
 			case Protocol.INIT:
 				System.out.println("Server received $> " + command);
-
+				if(games.get(Integer.valueOf(idCLient)) == null) {
 				games.put(Integer.valueOf(idCLient), new Game2048Model());
 				clientGame = games.get(Integer.valueOf(idCLient));
 				clientGame.initializeGrid();
 				clientGame.setArrowActive(true);
 				clientGame.addNewCell();
 				clientGame.addNewCell();
-
+				
 				dataEvent.server.send(dataEvent.socket,
 						(Protocol.INIT_OK + ":" + getter.getCells(clientGame))
 								.getBytes());
+				} else {
+					dataEvent.server.send(dataEvent.socket,
+							(Protocol.INIT_KO + ":" + getter.get404())
+									.getBytes());
+				}
 				break;
 
 			case Protocol.GAUCHE:

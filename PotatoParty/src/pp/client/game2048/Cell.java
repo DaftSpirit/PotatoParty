@@ -93,25 +93,25 @@ public class Cell {
                         break;
             case 4:     color = new Color(200, 255, 255);
                         break;
-            case 8:     color = new Color(170, 255, 255);
+            case 8:     color = new Color(150, 255, 255);
                         break;
-            case 16:    color = new Color(128, 255, 255);
+            case 16:    color = new Color(100, 255, 255);
                         break;
-            case 32:    color = new Color(85, 255, 255);
+            case 32:    color = new Color(50, 255, 255);
                         break;
-            case 64:    color = new Color(43, 255, 255);
+            case 64:    color = new Color(0, 255, 255);
                         break;
-            case 128:   color = new Color(0, 255, 255);
+            case 128:   color = new Color(0, 200, 255);
                         break;
-            case 256:   color = new Color(213, 213, 0);
+            case 256:   color = new Color(0, 150, 255);
                         break;
-            case 512:   color = new Color(170, 170, 0);
+            case 512:   color = new Color(0, 100, 255);
                         break;
-            case 1024:  color = new Color(128, 128, 0);
+            case 1024:  color = new Color(0, 50, 255);
                         break;
-            case 2048:  color = new Color(85, 85, 0);
+            case 2048:  color = new Color(0, 0, 255);
                         break;
-            default:    color = new Color(43, 43, 0);
+            default:    color = new Color(69, 69, 69);
                         break;
         }
          

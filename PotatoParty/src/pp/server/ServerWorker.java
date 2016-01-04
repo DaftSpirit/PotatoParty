@@ -46,7 +46,8 @@ public class ServerWorker implements Runnable {
 			// command
 			int command = Integer.valueOf(message[1]);
 
-			Game2048Model clientGame;
+			Game2048Model clientGame = games.get(idClient);
+			if(clientGame != null)clientGame.setArrowActive(true);
 
 			/**
 			 * Arrival of command
@@ -54,42 +55,35 @@ public class ServerWorker implements Runnable {
 			switch (command) {
 			case Protocol.INIT:
 				System.out.println("Server received $> INIT");
-				clientGame = games.get(idClient);
 				this.processInit(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.LEFT:
-				System.out.println("Server received $> LEFT " + "from : "
+				System.out.println("Server received $> LEFT from : "
 						+ idClient);
-				clientGame = games.get(idClient);
 				this.processLeft(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.RIGHT:
-				System.out.println("Server received $> RIGHT " + "from : "
+				System.out.println("Server received $> RIGHT from : "
 						+ idClient);
-				clientGame = games.get(idClient);
 				this.processRight(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.UP:
-				System.out.println("Server received $> UP " + "from : "
+				System.out.println("Server received $> UP from : "
 						+ idClient);
-				clientGame = games.get(idClient);
 				this.processUp(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.DOWN:
-				System.out.println("Server received $> DOWN " + "from : "
+				System.out.println("Server received $> DOWN from : "
 						+ idClient);
-
-				clientGame = games.get(idClient);
 				this.processDown(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.RESTART:
-				System.out.println("Server received $> RESTART from "
+				System.out.println("Server received $> RESTART from : "
 						+ idClient);
-				clientGame = games.get(idClient);
 				this.processRestart(clientGame, idClient, dataEvent);
 				break;
 			default:
-				System.out.println("Server Received $> "
+				System.out.println("Server Received $> NULL : "
 						+ new String(dataEvent.data));
 				dataEvent.server.send(dataEvent.socket, dataEvent.data);
 				break;
@@ -128,7 +122,7 @@ public class ServerWorker implements Runnable {
 
 	private void processDown(Game2048Model clientGame,
 			ServerDataEvent dataEvent, int idClient) {
-		if (clientGame.isArrowActive()) {
+		if (clientGame.isArrowActive() && !(clientGame == null)) {
 			if (clientGame.moveCellsDown()) {
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket,
@@ -139,7 +133,6 @@ public class ServerWorker implements Runnable {
 					clientGame.setArrowActive(false);
 					dataEvent.server.send(dataEvent.socket, (Protocol.GAME_OVER
 							+ ":" + getter.getCells(clientGame)).getBytes());
-					games.remove(idClient);
 				} else {
 					dataEvent.server.send(dataEvent.socket, (Protocol.DOWN_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());
@@ -150,7 +143,7 @@ public class ServerWorker implements Runnable {
 
 	private void processUp(Game2048Model clientGame, ServerDataEvent dataEvent,
 			int idClient) {
-		if (clientGame.isArrowActive()) {
+		if (clientGame.isArrowActive() && (clientGame != null)) {
 			if (clientGame.moveCellsUp()) {
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket,
@@ -161,7 +154,6 @@ public class ServerWorker implements Runnable {
 					clientGame.setArrowActive(false);
 					dataEvent.server.send(dataEvent.socket, (Protocol.GAME_OVER
 							+ ":" + getter.getCells(clientGame)).getBytes());
-					games.remove(idClient);
 				} else {
 					dataEvent.server.send(dataEvent.socket, (Protocol.UP_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());
@@ -172,7 +164,7 @@ public class ServerWorker implements Runnable {
 
 	private void processLeft(Game2048Model clientGame,
 			ServerDataEvent dataEvent, int idClient) {
-		if (clientGame.isArrowActive()) {
+		if (clientGame.isArrowActive() && (clientGame != null)) {
 			if (clientGame.moveCellsLeft()) {
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket, (Protocol.LEFT_OK
@@ -182,7 +174,6 @@ public class ServerWorker implements Runnable {
 					clientGame.setArrowActive(false);
 					dataEvent.server.send(dataEvent.socket, (Protocol.GAME_OVER
 							+ ":" + getter.getCells(clientGame)).getBytes());
-					games.remove(idClient);
 				} else {
 					dataEvent.server.send(dataEvent.socket, (Protocol.LEFT_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());
@@ -193,7 +184,7 @@ public class ServerWorker implements Runnable {
 
 	private void processRight(Game2048Model clientGame,
 			ServerDataEvent dataEvent, int idClient) {
-		if (clientGame.isArrowActive()) {
+		if (clientGame.isArrowActive() && (clientGame != null)) {
 			if (clientGame.moveCellsRight()) {
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket, (Protocol.RIGHT_OK
@@ -203,7 +194,6 @@ public class ServerWorker implements Runnable {
 					clientGame.setArrowActive(false);
 					dataEvent.server.send(dataEvent.socket, (Protocol.GAME_OVER
 							+ ":" + getter.getCells(clientGame)).getBytes());
-					games.remove(idClient);
 				} else {
 					dataEvent.server.send(dataEvent.socket, (Protocol.RIGHT_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());

@@ -1,6 +1,13 @@
 package pp.client;
 
+import java.awt.PopupMenu;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import pp.Protocol;
@@ -99,14 +106,7 @@ public class ClientWorker {
 		}
 		
 		
-		this.gp.repaint();
-		int i = 0;
-		for (int x = 0; x < gm.getSize(); x++) {
-            for (int y = 0; y < gm.getSize(); y++) {
-            	System.out.println(this.gm.getCell(x, y).getValue());
-            	i++;
-            }
-		}  
+		this.gp.repaint(); 
 		this.rsp = null;
 	}
 	
@@ -122,7 +122,7 @@ public class ClientWorker {
 
 	public void gameover()
 	{
-		gp.add(new JLabel(new ImageIcon("res/keepo.png")));
+		this.gp.add(new JLabel(new ImageIcon("res/keepo.png")));
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");

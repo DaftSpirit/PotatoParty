@@ -50,7 +50,7 @@ public class LauncherClient {
 			});
 
 
-			GridPanel gridPanel = new GridPanel();
+			GridPanel gridPanel = client.getGridPanel();
 			JLabel potato = new JLabel(new ImageIcon("res/potato.gif"));
 			gridPanel.add(potato);
 			
@@ -59,7 +59,6 @@ public class LauncherClient {
 
 			frame.addKeyListener(listener);
 			frame.setVisible(true);
-
 			// ------------------------------
 
 			Thread t = new Thread(client);

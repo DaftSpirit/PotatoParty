@@ -28,7 +28,7 @@ public class Client implements Runnable {
 	private static int ID;
 
 	// The 2048 View
-	private static GridPanel gridPanel;
+	private GridPanel gridPanel;
 
 	// The host:port combination to connect to
 	private InetAddress hostAddress;
@@ -56,6 +56,7 @@ public class Client implements Runnable {
 		this.port = port;
 		this.selector = this.initSelector();
 		this.ID = this.randomID();
+		this.gridPanel = new GridPanel();
 	}
 
 	public void send(byte[] data, ClientWorker handler) throws IOException {
@@ -162,7 +163,7 @@ public class Client implements Runnable {
 
 		// Handle the response
 		this.handleResponse(socketChannel, this.readBuffer.array(), numRead,
-				Client.gridPanel.getModel(), Client.gridPanel);
+				this.gridPanel.getModel(), this.gridPanel);
 	}
 
 	private void handleResponse(SocketChannel socketChannel, byte[] data,
@@ -263,5 +264,8 @@ public class Client implements Runnable {
 	public int getID() {
 		return this.ID;
 	}
-
+	
+	public GridPanel getGridPanel() {
+		return this.gridPanel;
+	}
 }

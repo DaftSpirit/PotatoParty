@@ -1,4 +1,4 @@
-package test;
+package pp.nio.client.game2048;
 
 import java.awt.Color;
 import java.awt.Graphics;

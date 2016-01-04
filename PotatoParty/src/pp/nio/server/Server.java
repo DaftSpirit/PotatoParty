@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pp.nio.ChangeRequest;
+import pp.nio.client.ChangeRequest;
 
 public class Server implements Runnable {
 	// The host:port combination to listen on

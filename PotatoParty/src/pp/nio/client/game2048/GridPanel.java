@@ -1,6 +1,7 @@
-package test;
+package pp.nio.client.game2048;
 
 import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
 public class GridPanel extends JPanel {

@@ -1,4 +1,4 @@
-package pp.nio;
+package pp.nio.client;
 
 import java.awt.Button;
 import java.awt.Color;
@@ -25,9 +25,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import test.Game2048Model;
-import test.GridPanel;
-import test.MyKeyListener;
+import pp.nio.Protocol;
+import pp.nio.client.game2048.Game2048Model;
+import pp.nio.client.game2048.GridPanel;
+import pp.nio.client.game2048.MyKeyListener;
 
 public class NioClient implements Runnable {
 
@@ -313,7 +314,7 @@ public class NioClient implements Runnable {
 			Thread t = new Thread(client);
 			t.setDaemon(true);
 			t.start();
-			System.out.println("Client n°" + ID + " is running....");
+			System.out.println("Client nï¿½" + ID + " is running....");
 			client.send((ID + ":20").getBytes(), handler);
 			handler.waitForResponse();
 			while (true) {

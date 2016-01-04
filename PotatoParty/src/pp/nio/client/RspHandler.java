@@ -1,10 +1,11 @@
-package pp.nio;
+package pp.nio.client;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import test.Game2048Model;
-import test.GridPanel;
+import pp.nio.Protocol;
+import pp.nio.client.game2048.Game2048Model;
+import pp.nio.client.game2048.GridPanel;
 
 public class RspHandler {
 	private byte[] rsp = null;

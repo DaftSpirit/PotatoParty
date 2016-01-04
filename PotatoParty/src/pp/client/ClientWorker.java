@@ -147,7 +147,8 @@ public class ClientWorker {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
             	i++;
             }
-		}   	
+		}   
+
 	}
 	
 	public void up(String[] cells)

@@ -55,44 +55,45 @@ public class RspHandler {
 			this.init(cells);
 			break;
 	
-		case Protocol.HAUT_OK:
+		case Protocol.UP_OK:
 			System.out.println("Pressed Up");
 			this.up(cells);
 			break;
 			
-		case Protocol.HAUT_KO:
+		case Protocol.UP_KO:
 			System.out.println("Pressed Up, but nothing happens");
 			break;
 			
-		case Protocol.BAS_OK:
+		case Protocol.DOWN_OK:
 			System.out.println("Pressed Down");
 			this.down(cells);
 			break;
 			
-		case Protocol.BAS_KO:
+		case Protocol.DOWN_KO:
 			System.out.println("Pressed Down but nothing happens");
 			break;
 			
-		case Protocol.GAUCHE_OK:
+		case Protocol.LEFT_OK:
 			System.out.println("Pressed Left");
 			this.left(cells);
 			break;
 			
-		case Protocol.GAUCHE_KO:
+		case Protocol.LEFT_KO:
 			System.out.println("Pressed Left but nothing happens");
 			break;
 			
-		case Protocol.DROITE_OK:
+		case Protocol.RIGHT_OK:
 			System.out.println("Pressed Right");
 			this.right(cells);
 			break;
 			
-		case Protocol.DROITE_KO:
+		case Protocol.RIGHT_KO:
 			System.out.println("Pressed Right but nothing happens");
 			break;
 			
 		case Protocol.RESTART_OK:
 			System.out.println("Game Restarted");
+			this.restart(cells);
 			break;
 		}
 		
@@ -108,6 +109,16 @@ public class RspHandler {
 		this.rsp = null;
 	}
 	
+	public void restart(String[] cells) {
+		int i = 0;
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
+            	i++;
+            }
+		}  
+	}
+
 	public void gameover()
 	{
 		gp.add(new JLabel(new ImageIcon("res/keepo.png")));

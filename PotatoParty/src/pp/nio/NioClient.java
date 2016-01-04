@@ -289,6 +289,7 @@ public class NioClient implements Runnable {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						client.send((ID + ":" + Protocol.RESTART).getBytes(), handler);
+						handler.waitForResponse();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -316,21 +317,21 @@ public class NioClient implements Runnable {
 			client.send((ID + ":20").getBytes(), handler);
 			handler.waitForResponse();
 			while (true) {
-				Thread.sleep(150);
+				Thread.sleep(70);
 				if (listener.isUpPressed()) {
-					client.send((ID + ":30").getBytes(), handler);
+					client.send((ID + ":" + Protocol.UP).getBytes(), handler);
 					handler.waitForResponse();
 				}
 				if (listener.isDownPressed()) {
-					client.send((ID + ":40").getBytes(), handler);
+					client.send((ID + ":" + Protocol.DOWN).getBytes(), handler);
 					handler.waitForResponse();
 				}
 				if (listener.isLeftPressed()) {
-					client.send((ID + ":50").getBytes(), handler);
+					client.send((ID + ":" + Protocol.LEFT).getBytes(), handler);
 					handler.waitForResponse();
 				}
 				if (listener.isRightPressed()) {
-					client.send((ID + ":60").getBytes(), handler);
+					client.send((ID + ":" + Protocol.RIGHT).getBytes(), handler);
 					handler.waitForResponse();
 				}
 			}

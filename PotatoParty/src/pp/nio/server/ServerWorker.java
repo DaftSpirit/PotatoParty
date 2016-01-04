@@ -15,8 +15,8 @@ public class ServerWorker implements Runnable {
 	private Map<Integer, Game2048Model> games = new HashMap<Integer, Game2048Model>();
 	private CellGetting getter = new CellGetting();
 
-	public void processData(Server server, SocketChannel socket,
-			byte[] data, int count) {
+	public void processData(Server server, SocketChannel socket, byte[] data,
+			int count) {
 		byte[] dataCopy = new byte[count];
 		System.arraycopy(data, 0, dataCopy, 0, count);
 		synchronized (queue) {
@@ -37,7 +37,7 @@ public class ServerWorker implements Runnable {
 					} catch (InterruptedException e) {
 					}
 				}
-				dataEvent = (ServerDataEvent) queue.remove(0);				
+				dataEvent = (ServerDataEvent) queue.remove(0);
 			}
 			// message received
 			String[] message = new String(dataEvent.data).split(":");
@@ -45,7 +45,7 @@ public class ServerWorker implements Runnable {
 			int idClient = Integer.valueOf(message[0]);
 			// command
 			int command = Integer.valueOf(message[1]);
-			
+
 			Game2048Model clientGame;
 
 			/**
@@ -73,15 +73,13 @@ public class ServerWorker implements Runnable {
 				System.out.println("Server received $> LEFT " + "from : "
 						+ idClient);
 				clientGame = games.get(idClient);
-				this.processLeft(clientGame, dataEvent,
-						idClient);
+				this.processLeft(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.DROITE:
 				System.out.println("Server received $> RIGHT " + "from : "
 						+ idClient);
 				clientGame = games.get(idClient);
-				this.processRight(clientGame, dataEvent,
-						idClient);
+				this.processRight(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.HAUT:
 				System.out.println("Server received $> UP " + "from : "
@@ -94,13 +92,14 @@ public class ServerWorker implements Runnable {
 						+ idClient);
 
 				clientGame = games.get(idClient);
-				this.processDown(clientGame, dataEvent,
-						idClient);
+				this.processDown(clientGame, dataEvent, idClient);
 				break;
-			case Protocol.RESTART :
-				System.out.println("Server received $> RESTART from " + idClient);
+			case Protocol.RESTART:
+				System.out.println("Server received $> RESTART from "
+						+ idClient);
 				clientGame = games.get(idClient);
 				this.processRestart(clientGame, idClient, dataEvent);
+				break;
 			default:
 				System.out.println("Server Received $> "
 						+ new String(dataEvent.data));
@@ -111,12 +110,14 @@ public class ServerWorker implements Runnable {
 		}
 	}
 
-	private void processRestart(Game2048Model clientGame, int idClient, ServerDataEvent dataEvent) {
+	private void processRestart(Game2048Model clientGame, int idClient,
+			ServerDataEvent dataEvent) {
 		clientGame.initializeGrid();
 		clientGame.addNewCell();
 		clientGame.addNewCell();
-		dataEvent.server.send(dataEvent.socket, (Protocol.RESTART_OK
-				+ ":" + getter.getCells(clientGame)).getBytes());
+		dataEvent.server.send(dataEvent.socket,
+				(Protocol.RESTART_OK + ":" + getter.getCells(clientGame))
+						.getBytes());
 	}
 
 	private void processDown(Game2048Model clientGame,

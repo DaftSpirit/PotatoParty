@@ -62,7 +62,6 @@ public class RspHandler {
 			
 		case Protocol.HAUT_KO:
 			System.out.println("Pressed Up, but nothing happens");
-			this.gp.repaint();
 			break;
 			
 		case Protocol.BAS_OK:
@@ -72,7 +71,6 @@ public class RspHandler {
 			
 		case Protocol.BAS_KO:
 			System.out.println("Pressed Down but nothing happens");
-			this.gp.repaint();
 			break;
 			
 		case Protocol.GAUCHE_OK:
@@ -82,7 +80,6 @@ public class RspHandler {
 			
 		case Protocol.GAUCHE_KO:
 			System.out.println("Pressed Left but nothing happens");
-			this.gp.repaint();
 			break;
 			
 		case Protocol.DROITE_OK:
@@ -92,12 +89,18 @@ public class RspHandler {
 			
 		case Protocol.DROITE_KO:
 			System.out.println("Pressed Right but nothing happens");
-			this.gp.repaint();			
 			break;
 		}
 		
 		
-		
+		this.gp.repaint();
+		int i = 0;
+		for (int x = 0; x < gm.getSize(); x++) {
+            for (int y = 0; y < gm.getSize(); y++) {
+            	System.out.println(this.gm.getCell(x, y).getValue());
+            	i++;
+            }
+		}  
 		this.rsp = null;
 	}
 	
@@ -109,7 +112,6 @@ public class RspHandler {
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
-		this.gp.repaint();
 	}
 	
 	public void win()
@@ -130,7 +132,6 @@ public class RspHandler {
             	i++;
             }
 		}   	
-		this.gp.repaint();
 	}
 	
 	public void up(String[] cells)
@@ -142,7 +143,6 @@ public class RspHandler {
             	i++;
             }
 		}   
-		this.gp.repaint();
 	}
 	
 	public void down(String[] cells)
@@ -154,7 +154,6 @@ public class RspHandler {
             	i++;
             }
 		}   
-		this.gp.repaint();
 	}
 	
 	public void left(String[] cells)
@@ -166,7 +165,6 @@ public class RspHandler {
             	i++;
             }
 		}   
-		this.gp.repaint();
 	}
 	
 	public void right(String[] cells)
@@ -178,6 +176,5 @@ public class RspHandler {
             	i++;
             }
 		}   
-		this.gp.repaint();
 	}
 }

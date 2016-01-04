@@ -103,8 +103,7 @@ public class EchoWorker implements Runnable {
 					}
 				}
 
-				dataEvent.server.send(dataEvent.socket, (Protocol.GAUCHE_OK
-						+ ":" + getter.getCells(clientGame)).getBytes());
+				
 				break;
 
 			case Protocol.DROITE:
@@ -136,8 +135,7 @@ public class EchoWorker implements Runnable {
 					}
 				}
 
-				dataEvent.server.send(dataEvent.socket, (Protocol.DROITE_OK
-						+ ":" + getter.getCells(clientGame)).getBytes());
+				
 				break;
 
 			case Protocol.HAUT:

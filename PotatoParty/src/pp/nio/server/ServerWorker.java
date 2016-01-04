@@ -100,6 +100,10 @@ public class ServerWorker implements Runnable {
 				this.processDown(clientGame, dataEvent,
 						idClient);
 				break;
+			case Protocol.RESTART :
+				System.out.println("Server received $> RESTART from " + idClient);
+				clientGame = games.get(idClient);
+				this.processRestart(clientGame, idClient, dataEvent);
 			default:
 				System.out.println("Server Received $> "
 						+ new String(dataEvent.data));
@@ -108,6 +112,14 @@ public class ServerWorker implements Runnable {
 			}
 
 		}
+	}
+
+	private void processRestart(Game2048Model clientGame, int idClient, ServerDataEvent dataEvent) {
+		clientGame.initializeGrid();
+		clientGame.addNewCell();
+		clientGame.addNewCell();
+		dataEvent.server.send(dataEvent.socket, (Protocol.RESTART_OK
+				+ ":" + getter.getCells(clientGame)).getBytes());
 	}
 
 	private void processDown(Game2048Model clientGame,

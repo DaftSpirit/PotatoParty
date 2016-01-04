@@ -1,5 +1,10 @@
 package pp.nio;
 
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,6 +21,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -24,11 +30,10 @@ import test.GridPanel;
 import test.MyKeyListener;
 
 public class NioClient implements Runnable {
-	
-	
+
 	// The Id of the client
 	private static int ID;
-	
+
 	// The 2048 View
 	private static GridPanel gridPanel;
 
@@ -162,7 +167,8 @@ public class NioClient implements Runnable {
 		}
 
 		// Handle the response
-		this.handleResponse(socketChannel, this.readBuffer.array(), numRead, this.gridPanel.getModel(), this.gridPanel);
+		this.handleResponse(socketChannel, this.readBuffer.array(), numRead,
+				this.gridPanel.getModel(), this.gridPanel);
 	}
 
 	private void handleResponse(SocketChannel socketChannel, byte[] data,
@@ -176,7 +182,7 @@ public class NioClient implements Runnable {
 		RspHandler handler = (RspHandler) this.rspHandlers.get(socketChannel);
 
 		// And pass the response to it
-		handler.handleResponse(rspData , gm, gp);
+		handler.handleResponse(rspData, gm, gp);
 		// The handler has seen enough, close the connection
 		// socketChannel.close();
 		// socketChannel.keyFor(this.selector).cancel();
@@ -254,59 +260,90 @@ public class NioClient implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		
-		/* ID generation */
-		
-		Random r = new Random();
-		int Low = 1;
-		int High = 10000;
-		ID = r.nextInt(High-Low) + Low;
-		
-		/* Frame */
-		JFrame frame = new JFrame();
-		
-		MyKeyListener listener = new MyKeyListener();
-		frame.addKeyListener(listener);
 
-		frame.setSize(800, 585);
-		frame.setResizable(false);
-		frame.setLocation(100, 100);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		gridPanel = new GridPanel();
-		JLabel potato = new JLabel(new ImageIcon("res/potato.gif"));
-		//gridPanel.add
-		gridPanel.add(new JLabel(new ImageIcon("res/potato.gif")));
-        frame.add(gridPanel);
-        
-        
-        
-		
-		frame.setVisible(true);
-		
-		// ------------------------------
-		
 		try {
-			NioClient client = new NioClient(
+
+			/* Client */
+			final NioClient client = new NioClient(
 					InetAddress.getByName("localhost"), 9090);
+			final RspHandler handler = new RspHandler();
+
+
+			/* Key listener */
+			MyKeyListener listener = new MyKeyListener();
+
+			/* ID generation */
+			ID = randomID();
+
+			/* Frame */
+			JFrame frame = new JFrame();
+
+			frame.setSize(800, 585);
+			frame.setResizable(false);
+			frame.setLocation(100, 100);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+			JButton restart = new JButton("RESTART");
+			restart.setFocusable(false);
+			restart.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						client.send((ID + ":23").getBytes(), handler);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+
+			});
+
+
+			gridPanel = new GridPanel();
+			JLabel potato = new JLabel(new ImageIcon("res/potato.gif"));
+			gridPanel.add(potato);
+			
+			frame.add(gridPanel);
+			gridPanel.add(restart);
+
+			frame.addKeyListener(listener);
+			frame.setVisible(true);
+
+			// ------------------------------
+
 			Thread t = new Thread(client);
 			t.setDaemon(true);
 			t.start();
-			RspHandler handler = new RspHandler();
-			System.out.println("Client n°"+ID+ " is running....");
-			client.send((ID+":20").getBytes(), handler);
+			System.out.println("Client n°" + ID + " is running....");
+			client.send((ID + ":20").getBytes(), handler);
 			handler.waitForResponse();
-			while(true)
-			{
+			while (true) {
 				Thread.sleep(150);
-				if (listener.isUpPressed()) { client.send((ID+":30").getBytes(), handler); handler.waitForResponse();}
-				if (listener.isDownPressed()) {client.send((ID+":40").getBytes(), handler);  handler.waitForResponse();}
-				if (listener.isLeftPressed()) {client.send((ID+":50").getBytes(), handler); handler.waitForResponse();}
-				if (listener.isRightPressed()) {client.send((ID+":60").getBytes(), handler); handler.waitForResponse();}
+				if (listener.isUpPressed()) {
+					client.send((ID + ":30").getBytes(), handler);
+					handler.waitForResponse();
+				}
+				if (listener.isDownPressed()) {
+					client.send((ID + ":40").getBytes(), handler);
+					handler.waitForResponse();
+				}
+				if (listener.isLeftPressed()) {
+					client.send((ID + ":50").getBytes(), handler);
+					handler.waitForResponse();
+				}
+				if (listener.isRightPressed()) {
+					client.send((ID + ":60").getBytes(), handler);
+					handler.waitForResponse();
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private static int randomID() {
+		Random r = new Random();
+		int Low = 1;
+		int High = 10000;
+		return r.nextInt(High - Low) + Low;
+	}
+
 }

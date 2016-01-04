@@ -13,6 +13,9 @@ public class Protocol {
 	public static final int INIT_OK = 21;
 	
 	public static final int INIT_KO = 22;
+	
+	public static final int RESTART = 23;
+
 
 
 	

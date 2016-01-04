@@ -14,7 +14,6 @@ public class ServerWorker implements Runnable {
 	private List<ServerDataEvent> queue = new LinkedList<ServerDataEvent>();
 	private Map<Integer, Game2048Model> games = new HashMap<Integer, Game2048Model>();
 	private CellGetting getter = new CellGetting();
-	private String[] message;
 
 	public void processData(Server server, SocketChannel socket,
 			byte[] data, int count) {
@@ -41,18 +40,18 @@ public class ServerWorker implements Runnable {
 				dataEvent = (ServerDataEvent) queue.remove(0);				
 			}
 			// message received
-			this.message = new String(dataEvent.data).split(":");
+			String[] message = new String(dataEvent.data).split(":");
 			// IdClient
-			int idClient = Integer.getInteger(this.message[0]);
+			int idClient = Integer.valueOf(message[0]);
 			// command
-			String command = this.message[1];
+			int command = Integer.valueOf(message[1]);
 			
 			Game2048Model clientGame;
 
 			/**
 			 * Arrival of command
 			 */
-			switch (Integer.valueOf(command)) {
+			switch (command) {
 			case Protocol.INIT:
 				System.out.println("Server received $> INIT");
 				if (games.get(idClient) == null) {

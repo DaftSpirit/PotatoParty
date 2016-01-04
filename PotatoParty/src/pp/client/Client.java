@@ -55,6 +55,7 @@ public class Client implements Runnable {
 		this.hostAddress = hostAddress;
 		this.port = port;
 		this.selector = this.initSelector();
+		this.ID = this.randomID();
 	}
 
 	public void send(byte[] data, ClientWorker handler) throws IOException {
@@ -252,92 +253,15 @@ public class Client implements Runnable {
 		return SelectorProvider.provider().openSelector();
 	}
 
-	public static void main(String[] args) {
-
-		try {
-
-			/* Client */
-			final Client client = new Client(
-					InetAddress.getByName("localhost"), 9090);
-			final ClientWorker handler = new ClientWorker();
-
-
-			/* Key listener */
-			MyKeyListener listener = new MyKeyListener();
-
-			/* ID generation */
-			ID = randomID();
-
-			/* Frame */
-			JFrame frame = new JFrame();
-
-			frame.setSize(800, 585);
-			frame.setResizable(false);
-			frame.setLocation(100, 100);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-			JButton restart = new JButton("RESTART");
-			restart.setFocusable(false);
-			restart.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					try {
-						client.send((ID + ":" + Protocol.RESTART).getBytes(), handler);
-						handler.waitForResponse();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-
-			});
-
-
-			gridPanel = new GridPanel();
-			JLabel potato = new JLabel(new ImageIcon("res/potato.gif"));
-			gridPanel.add(potato);
-			
-			frame.add(gridPanel);
-			gridPanel.add(restart);
-
-			frame.addKeyListener(listener);
-			frame.setVisible(true);
-
-			// ------------------------------
-
-			Thread t = new Thread(client);
-			t.setDaemon(true);
-			t.start();
-			System.out.println("Client n�" + ID + " is running....");
-			client.send((ID + ":20").getBytes(), handler);
-			handler.waitForResponse();
-			while (true) {
-				Thread.sleep(70);
-				if (listener.isUpPressed()) {
-					client.send((ID + ":" + Protocol.UP).getBytes(), handler);
-					handler.waitForResponse();
-				}
-				if (listener.isDownPressed()) {
-					client.send((ID + ":" + Protocol.DOWN).getBytes(), handler);
-					handler.waitForResponse();
-				}
-				if (listener.isLeftPressed()) {
-					client.send((ID + ":" + Protocol.LEFT).getBytes(), handler);
-					handler.waitForResponse();
-				}
-				if (listener.isRightPressed()) {
-					client.send((ID + ":" + Protocol.RIGHT).getBytes(), handler);
-					handler.waitForResponse();
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static int randomID() {
+	private int randomID() {
 		Random r = new Random();
 		int Low = 1;
 		int High = 10000;
 		return r.nextInt(High - Low) + Low;
+	}
+
+	public int getID() {
+		return this.ID;
 	}
 
 }

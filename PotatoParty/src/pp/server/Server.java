@@ -209,15 +209,4 @@ public class Server implements Runnable {
 		// changes
 		this.selector.wakeup();
 	}
-
-	public static void main(String[] args) {
-		try {
-			ServerWorker worker = new ServerWorker();
-			new Thread(worker).start();
-			new Thread(new Server(InetAddress.getByName("localhost"), 9090, worker)).start();
-			System.out.println("Server running ....");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }

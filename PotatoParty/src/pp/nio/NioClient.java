@@ -274,6 +274,8 @@ public class NioClient implements Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		gridPanel = new GridPanel();
+		JLabel potato = new JLabel(new ImageIcon("res/potato.gif"));
+		//gridPanel.add
 		gridPanel.add(new JLabel(new ImageIcon("res/potato.gif")));
         frame.add(gridPanel);
         

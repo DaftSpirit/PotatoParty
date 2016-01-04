@@ -38,12 +38,10 @@ public class ServerWorker implements Runnable {
 					} catch (InterruptedException e) {
 					}
 				}
-				dataEvent = (ServerDataEvent) queue.remove(0);
-				// message received
-				this.message = new String(dataEvent.data).split(":");
-
-				
+				dataEvent = (ServerDataEvent) queue.remove(0);				
 			}
+			// message received
+			this.message = new String(dataEvent.data).split(":");
 			// IdClient
 			int idClient = Integer.getInteger(this.message[0]);
 			// command

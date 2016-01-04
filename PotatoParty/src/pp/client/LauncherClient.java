@@ -59,7 +59,6 @@ public class LauncherClient {
 
 			frame.addKeyListener(listener);
 			frame.setVisible(true);
-			// ------------------------------
 
 			Thread t = new Thread(client);
 			t.setDaemon(true);

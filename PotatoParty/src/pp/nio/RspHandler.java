@@ -91,7 +91,7 @@ public class RspHandler {
 			System.out.println("Pressed Right but nothing happens");
 			break;
 			
-		case Protocol.RESTART:
+		case Protocol.RESTART_OK:
 			System.out.println("Game Restarted");
 			break;
 		}

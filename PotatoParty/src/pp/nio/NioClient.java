@@ -288,7 +288,7 @@ public class NioClient implements Runnable {
 			restart.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					try {
-						client.send((ID + ":23").getBytes(), handler);
+						client.send((ID + ":" + Protocol.RESTART).getBytes(), handler);
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}

@@ -1,6 +1,6 @@
-package pp.nio.server;
+package pp.server;
 
-import pp.nio.server.game2048.Game2048Model;
+import pp.server.game2048.Game2048Model;
 
 public class CellGetting {
 				

@@ -1,4 +1,4 @@
-package pp.nio.client.game2048;
+package pp.client.game2048;
 
 import java.awt.Color;
 import java.awt.Font;

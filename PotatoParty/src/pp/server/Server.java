@@ -1,4 +1,4 @@
-package pp.nio.server;
+package pp.server;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pp.nio.client.ChangeRequest;
+import pp.client.ChangeRequest;
 
 public class Server implements Runnable {
 	// The host:port combination to listen on

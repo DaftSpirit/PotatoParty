@@ -1,4 +1,4 @@
-package pp.nio.server.game2048;
+package pp.server.game2048;
 
 import java.awt.Color;
 import java.awt.Dimension;

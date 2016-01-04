@@ -1,4 +1,4 @@
-package pp.nio.client;
+package pp.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,9 +18,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import pp.Protocol;
-import pp.nio.client.game2048.Game2048Model;
-import pp.nio.client.game2048.GridPanel;
-import pp.nio.client.game2048.MyKeyListener;
+import pp.client.game2048.Game2048Model;
+import pp.client.game2048.GridPanel;
+import pp.client.game2048.MyKeyListener;
 
 public class Client implements Runnable {
 

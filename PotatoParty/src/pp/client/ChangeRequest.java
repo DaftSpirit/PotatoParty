@@ -1,4 +1,4 @@
-package pp.nio.client;
+package pp.client;
 
 import java.nio.channels.SocketChannel;
 

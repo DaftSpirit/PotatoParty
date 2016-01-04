@@ -1,4 +1,4 @@
-package pp.nio;
+package pp.nio.server;
 
 import java.nio.channels.SocketChannel;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import pp.nio.Protocol;
 import game2048.model.Game2048Model;
 
 public class ServerWorker implements Runnable {
@@ -15,7 +16,7 @@ public class ServerWorker implements Runnable {
 	private CellGetting getter = new CellGetting();
 	private String[] message;
 
-	public void processData(NioServer server, SocketChannel socket,
+	public void processData(Server server, SocketChannel socket,
 			byte[] data, int count) {
 		byte[] dataCopy = new byte[count];
 		System.arraycopy(data, 0, dataCopy, 0, count);

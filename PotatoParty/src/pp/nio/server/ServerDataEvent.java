@@ -1,13 +1,13 @@
-package pp.nio;
+package pp.nio.server;
 
 import java.nio.channels.SocketChannel;
 
 class ServerDataEvent {
-	public NioServer server;
+	public Server server;
 	public SocketChannel socket;
 	public byte[] data;
 
-	public ServerDataEvent(NioServer server, SocketChannel socket, byte[] data) {
+	public ServerDataEvent(Server server, SocketChannel socket, byte[] data) {
 		this.server = server;
 		this.socket = socket;
 		this.data = data;

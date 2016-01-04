@@ -1,4 +1,4 @@
-package pp.nio;
+package pp.nio.server;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -16,7 +16,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class NioServer implements Runnable {
+import pp.nio.ChangeRequest;
+
+public class Server implements Runnable {
 	// The host:port combination to listen on
 	private InetAddress hostAddress;
 	private int port;
@@ -32,7 +34,7 @@ public class NioServer implements Runnable {
 
 	private ServerWorker worker;
 
-	public NioServer(InetAddress hostAddress, int port, ServerWorker worker)
+	public Server(InetAddress hostAddress, int port, ServerWorker worker)
 			throws IOException {
 		this.hostAddress = hostAddress;
 		this.port = port;
@@ -212,7 +214,7 @@ public class NioServer implements Runnable {
 		try {
 			ServerWorker worker = new ServerWorker();
 			new Thread(worker).start();
-			new Thread(new NioServer(InetAddress.getByName("localhost"), 9090, worker)).start();
+			new Thread(new Server(InetAddress.getByName("localhost"), 9090, worker)).start();
 			System.out.println("Server running ....");
 		} catch (IOException e) {
 			e.printStackTrace();

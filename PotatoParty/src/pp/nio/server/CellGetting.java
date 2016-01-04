@@ -1,4 +1,4 @@
-package pp.nio;
+package pp.nio.server;
 
 import game2048.model.Game2048Model;
 

@@ -30,9 +30,9 @@ public class NioServer implements Runnable {
 	// The buffer into which we'll read data when it's available
 	private ByteBuffer readBuffer = ByteBuffer.allocate(8192);
 
-	private EchoWorker worker;
+	private ServerWorker worker;
 
-	public NioServer(InetAddress hostAddress, int port, EchoWorker worker)
+	public NioServer(InetAddress hostAddress, int port, ServerWorker worker)
 			throws IOException {
 		this.hostAddress = hostAddress;
 		this.port = port;
@@ -210,7 +210,7 @@ public class NioServer implements Runnable {
 
 	public static void main(String[] args) {
 		try {
-			EchoWorker worker = new EchoWorker();
+			ServerWorker worker = new ServerWorker();
 			new Thread(worker).start();
 			new Thread(new NioServer(InetAddress.getByName("localhost"), 9090, worker)).start();
 			System.out.println("Server running ....");

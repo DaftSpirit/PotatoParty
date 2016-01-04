@@ -54,20 +54,8 @@ public class ServerWorker implements Runnable {
 			switch (command) {
 			case Protocol.INIT:
 				System.out.println("Server received $> INIT");
-				if (games.get(idClient) == null) {
-					games.put(idClient, new Game2048Model());
-					clientGame = games.get(idClient);
-					clientGame.initializeGrid();
-					clientGame.setArrowActive(true);
-					clientGame.addNewCell();
-					clientGame.addNewCell();
-
-					dataEvent.server.send(dataEvent.socket, (Protocol.INIT_OK
-							+ ":" + getter.getCells(clientGame)).getBytes());
-				} else {
-					dataEvent.server.send(dataEvent.socket, (Protocol.INIT_KO
-							+ ":" + getter.get404()).getBytes());
-				}
+				clientGame = games.get(idClient);
+				this.processInit(clientGame, dataEvent, idClient);
 				break;
 			case Protocol.GAUCHE:
 				System.out.println("Server received $> LEFT " + "from : "
@@ -110,6 +98,24 @@ public class ServerWorker implements Runnable {
 		}
 	}
 
+	private void processInit(Game2048Model clientGame,
+			ServerDataEvent dataEvent, int idClient) {
+		if (games.get(idClient) == null) {
+			games.put(idClient, new Game2048Model());
+			clientGame = games.get(idClient);
+			clientGame.initializeGrid();
+			clientGame.setArrowActive(true);
+			clientGame.addNewCell();
+			clientGame.addNewCell();
+			dataEvent.server.send(dataEvent.socket,
+					(Protocol.INIT_OK + ":" + getter.getCells(clientGame))
+							.getBytes());
+		} else {
+			dataEvent.server.send(dataEvent.socket,
+					(Protocol.INIT_KO + ":" + getter.get404()).getBytes());
+		}
+	}
+
 	private void processRestart(Game2048Model clientGame, int idClient,
 			ServerDataEvent dataEvent) {
 		clientGame.initializeGrid();
@@ -123,14 +129,11 @@ public class ServerWorker implements Runnable {
 	private void processDown(Game2048Model clientGame,
 			ServerDataEvent dataEvent, int idClient) {
 		if (clientGame.isArrowActive()) {
-
 			if (clientGame.moveCellsDown()) {
-
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket,
 						(Protocol.BAS_OK + ":" + getter.getCells(clientGame))
 								.getBytes());
-
 			} else {
 				if (clientGame.isGameOver()) {
 					clientGame.setArrowActive(false);
@@ -148,14 +151,11 @@ public class ServerWorker implements Runnable {
 	private void processUp(Game2048Model clientGame, ServerDataEvent dataEvent,
 			int idClient) {
 		if (clientGame.isArrowActive()) {
-
 			if (clientGame.moveCellsUp()) {
-
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket,
 						(Protocol.HAUT_OK + ":" + getter.getCells(clientGame))
 								.getBytes());
-
 			} else {
 				if (clientGame.isGameOver()) {
 					clientGame.setArrowActive(false);
@@ -173,13 +173,10 @@ public class ServerWorker implements Runnable {
 	private void processLeft(Game2048Model clientGame,
 			ServerDataEvent dataEvent, int idClient) {
 		if (clientGame.isArrowActive()) {
-
 			if (clientGame.moveCellsLeft()) {
-
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket, (Protocol.GAUCHE_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
-
 			} else {
 				if (clientGame.isGameOver()) {
 					clientGame.setArrowActive(false);
@@ -197,13 +194,10 @@ public class ServerWorker implements Runnable {
 	private void processRight(Game2048Model clientGame,
 			ServerDataEvent dataEvent, int idClient) {
 		if (clientGame.isArrowActive()) {
-
 			if (clientGame.moveCellsRight()) {
-
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket, (Protocol.DROITE_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
-
 			} else {
 				if (clientGame.isGameOver()) {
 					clientGame.setArrowActive(false);

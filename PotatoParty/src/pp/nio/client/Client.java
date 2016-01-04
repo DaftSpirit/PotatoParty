@@ -1,15 +1,8 @@
 package pp.nio.client;
 
-import java.awt.Button;
-import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -19,18 +12,17 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
 import java.util.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import pp.nio.Protocol;
+import pp.Protocol;
 import pp.nio.client.game2048.Game2048Model;
 import pp.nio.client.game2048.GridPanel;
 import pp.nio.client.game2048.MyKeyListener;
 
-public class NioClient implements Runnable {
+public class Client implements Runnable {
 
 	// The Id of the client
 	private static int ID;
@@ -56,16 +48,16 @@ public class NioClient implements Runnable {
 	private Map<SocketChannel, List> pendingData = new HashMap<SocketChannel, List>();
 
 	// Maps a SocketChannel to a RspHandler
-	private Map<SocketChannel, RspHandler> rspHandlers = Collections
-			.synchronizedMap(new HashMap<SocketChannel, RspHandler>());
+	private Map<SocketChannel, ClientWorker> rspHandlers = Collections
+			.synchronizedMap(new HashMap<SocketChannel, ClientWorker>());
 
-	public NioClient(InetAddress hostAddress, int port) throws IOException {
+	public Client(InetAddress hostAddress, int port) throws IOException {
 		this.hostAddress = hostAddress;
 		this.port = port;
 		this.selector = this.initSelector();
 	}
 
-	public void send(byte[] data, RspHandler handler) throws IOException {
+	public void send(byte[] data, ClientWorker handler) throws IOException {
 		// Start a new connection
 		SocketChannel socket = this.initiateConnection();
 
@@ -169,7 +161,7 @@ public class NioClient implements Runnable {
 
 		// Handle the response
 		this.handleResponse(socketChannel, this.readBuffer.array(), numRead,
-				this.gridPanel.getModel(), this.gridPanel);
+				Client.gridPanel.getModel(), Client.gridPanel);
 	}
 
 	private void handleResponse(SocketChannel socketChannel, byte[] data,
@@ -180,7 +172,7 @@ public class NioClient implements Runnable {
 		System.arraycopy(data, 0, rspData, 0, numRead);
 
 		// Look up the handler for this channel
-		RspHandler handler = (RspHandler) this.rspHandlers.get(socketChannel);
+		ClientWorker handler = (ClientWorker) this.rspHandlers.get(socketChannel);
 
 		// And pass the response to it
 		handler.handleResponse(rspData, gm, gp);
@@ -265,9 +257,9 @@ public class NioClient implements Runnable {
 		try {
 
 			/* Client */
-			final NioClient client = new NioClient(
+			final Client client = new Client(
 					InetAddress.getByName("localhost"), 9090);
-			final RspHandler handler = new RspHandler();
+			final ClientWorker handler = new ClientWorker();
 
 
 			/* Key listener */

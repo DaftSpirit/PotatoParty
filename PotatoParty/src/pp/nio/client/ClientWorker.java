@@ -3,11 +3,11 @@ package pp.nio.client;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import pp.nio.Protocol;
+import pp.Protocol;
 import pp.nio.client.game2048.Game2048Model;
 import pp.nio.client.game2048.GridPanel;
 
-public class RspHandler {
+public class ClientWorker {
 	private byte[] rsp = null;
 	private Game2048Model gm = null;
 	private GridPanel gp = null;

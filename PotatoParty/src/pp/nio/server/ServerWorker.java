@@ -6,8 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pp.nio.Protocol;
-import pp.nio.server.game2048.model.Game2048Model;
+import pp.Protocol;
+import pp.nio.server.game2048.Game2048Model;
 
 public class ServerWorker implements Runnable {
 

@@ -1,4 +1,4 @@
-package game2048.model;
+package pp.game2048.model;
 
 import java.awt.Color;
 import java.awt.Dimension;

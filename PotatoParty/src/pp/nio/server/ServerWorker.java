@@ -57,25 +57,25 @@ public class ServerWorker implements Runnable {
 				clientGame = games.get(idClient);
 				this.processInit(clientGame, dataEvent, idClient);
 				break;
-			case Protocol.GAUCHE:
+			case Protocol.LEFT:
 				System.out.println("Server received $> LEFT " + "from : "
 						+ idClient);
 				clientGame = games.get(idClient);
 				this.processLeft(clientGame, dataEvent, idClient);
 				break;
-			case Protocol.DROITE:
+			case Protocol.RIGHT:
 				System.out.println("Server received $> RIGHT " + "from : "
 						+ idClient);
 				clientGame = games.get(idClient);
 				this.processRight(clientGame, dataEvent, idClient);
 				break;
-			case Protocol.HAUT:
+			case Protocol.UP:
 				System.out.println("Server received $> UP " + "from : "
 						+ idClient);
 				clientGame = games.get(idClient);
 				this.processUp(clientGame, dataEvent, idClient);
 				break;
-			case Protocol.BAS:
+			case Protocol.DOWN:
 				System.out.println("Server received $> DOWN " + "from : "
 						+ idClient);
 
@@ -132,7 +132,7 @@ public class ServerWorker implements Runnable {
 			if (clientGame.moveCellsDown()) {
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket,
-						(Protocol.BAS_OK + ":" + getter.getCells(clientGame))
+						(Protocol.DOWN_OK + ":" + getter.getCells(clientGame))
 								.getBytes());
 			} else {
 				if (clientGame.isGameOver()) {
@@ -141,7 +141,7 @@ public class ServerWorker implements Runnable {
 							+ ":" + getter.getCells(clientGame)).getBytes());
 					games.remove(idClient);
 				} else {
-					dataEvent.server.send(dataEvent.socket, (Protocol.BAS_KO
+					dataEvent.server.send(dataEvent.socket, (Protocol.DOWN_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());
 				}
 			}
@@ -154,7 +154,7 @@ public class ServerWorker implements Runnable {
 			if (clientGame.moveCellsUp()) {
 				clientGame.addNewCell();
 				dataEvent.server.send(dataEvent.socket,
-						(Protocol.HAUT_OK + ":" + getter.getCells(clientGame))
+						(Protocol.UP_OK + ":" + getter.getCells(clientGame))
 								.getBytes());
 			} else {
 				if (clientGame.isGameOver()) {
@@ -163,7 +163,7 @@ public class ServerWorker implements Runnable {
 							+ ":" + getter.getCells(clientGame)).getBytes());
 					games.remove(idClient);
 				} else {
-					dataEvent.server.send(dataEvent.socket, (Protocol.HAUT_KO
+					dataEvent.server.send(dataEvent.socket, (Protocol.UP_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());
 				}
 			}
@@ -175,7 +175,7 @@ public class ServerWorker implements Runnable {
 		if (clientGame.isArrowActive()) {
 			if (clientGame.moveCellsLeft()) {
 				clientGame.addNewCell();
-				dataEvent.server.send(dataEvent.socket, (Protocol.GAUCHE_OK
+				dataEvent.server.send(dataEvent.socket, (Protocol.LEFT_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
 			} else {
 				if (clientGame.isGameOver()) {
@@ -184,7 +184,7 @@ public class ServerWorker implements Runnable {
 							+ ":" + getter.getCells(clientGame)).getBytes());
 					games.remove(idClient);
 				} else {
-					dataEvent.server.send(dataEvent.socket, (Protocol.GAUCHE_KO
+					dataEvent.server.send(dataEvent.socket, (Protocol.LEFT_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());
 				}
 			}
@@ -196,7 +196,7 @@ public class ServerWorker implements Runnable {
 		if (clientGame.isArrowActive()) {
 			if (clientGame.moveCellsRight()) {
 				clientGame.addNewCell();
-				dataEvent.server.send(dataEvent.socket, (Protocol.DROITE_OK
+				dataEvent.server.send(dataEvent.socket, (Protocol.RIGHT_OK
 						+ ":" + getter.getCells(clientGame)).getBytes());
 			} else {
 				if (clientGame.isGameOver()) {
@@ -205,7 +205,7 @@ public class ServerWorker implements Runnable {
 							+ ":" + getter.getCells(clientGame)).getBytes());
 					games.remove(idClient);
 				} else {
-					dataEvent.server.send(dataEvent.socket, (Protocol.DROITE_KO
+					dataEvent.server.send(dataEvent.socket, (Protocol.RIGHT_KO
 							+ ":" + getter.getCells(clientGame)).getBytes());
 				}
 			}

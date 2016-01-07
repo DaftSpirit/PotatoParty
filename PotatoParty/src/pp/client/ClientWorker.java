@@ -1,12 +1,15 @@
 package pp.client;
 
+import java.awt.Dialog.ModalityType;
 import java.awt.PopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -18,6 +21,8 @@ public class ClientWorker {
 	private byte[] rsp = null;
 	private Game2048Model gm = null;
 	private GridPanel gp = null;
+	
+	int n = 0;
 
 	public synchronized boolean handleResponse(byte[] rsp, Game2048Model gm, GridPanel gp) {
 		this.gp = gp;
@@ -44,8 +49,11 @@ public class ClientWorker {
 		int type = Integer.valueOf(cmd[0]);
 		switch(type) {
 		case Protocol.GAME_OVER:
-			System.out.println("You've Lost");
-			this.gameover();
+			if(n==0)
+			{	
+				System.out.println("You've Lost");
+				this.gameover();
+			}
 			break;
 		
 		case Protocol.WIN:
@@ -117,12 +125,26 @@ public class ClientWorker {
             	this.gm.getCell(x, y).setValue(Integer.valueOf(cells[i]));
             	i++;
             }
-		}  
+		}
+		n = 0;
 	}
 
 	public void gameover()
 	{
-		this.gp.add(new JLabel(new ImageIcon("res/keepo.png")));
+		n++;
+		JDialog go = new JDialog();
+		go.add(new JLabel(new ImageIcon("res/keepo.png")));
+		go.setModal (true);
+		go.setModalityType (ModalityType.APPLICATION_MODAL);
+		go.setSize(500, 200);
+		go.setResizable(false);
+		go.setAlwaysOnTop(true);
+		go.setFocusableWindowState(true);
+		go.setLocationRelativeTo(gp);
+		go.dispatchEvent(new WindowEvent(go, WindowEvent.WINDOW_CLOSING));
+		//go.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		go.setVisible(true);
+
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");
 		System.out.println("YOU\'VE LOST THE GAME");

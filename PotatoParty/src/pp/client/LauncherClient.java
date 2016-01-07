@@ -28,7 +28,7 @@ public class LauncherClient {
 			MyKeyListener listener = new MyKeyListener();
 
 			/* Frame */
-			JFrame frame = new JFrame();
+			JFrame frame = new JFrame("Potato Party N° " + client.getID());
 
 			frame.setSize(800, 585);
 			frame.setResizable(false);
@@ -54,8 +54,13 @@ public class LauncherClient {
 			JLabel potato = new JLabel(new ImageIcon("res/potato.gif"));
 			gridPanel.add(potato);
 			
+			//JLabel string_id = new JLabel(String.valueOf("N°"+client.getID()));
+			//string_id.setBounds(1500, 1500, 1500, 1500);
+			
 			frame.add(gridPanel);
 			gridPanel.add(restart);
+			//gridPanel.add(string_id);
+
 
 			frame.addKeyListener(listener);
 			frame.setVisible(true);

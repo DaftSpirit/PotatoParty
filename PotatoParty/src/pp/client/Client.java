@@ -1,7 +1,6 @@
 package pp.client;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -12,14 +11,9 @@ import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
 import java.util.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 import pp.client.game2048.Game2048Model;
 import pp.client.game2048.GridPanel;
-import pp.client.game2048.MyKeyListener;
+
 
 public class Client implements Runnable {
 
@@ -54,7 +48,7 @@ public class Client implements Runnable {
 		this.hostAddress = hostAddress;
 		this.port = port;
 		this.selector = this.initSelector();
-		this.ID = this.randomID();
+		ID = this.randomID();
 		this.gridPanel = new GridPanel();
 	}
 
@@ -261,7 +255,7 @@ public class Client implements Runnable {
 	}
 
 	public int getID() {
-		return this.ID;
+		return ID;
 	}
 	
 	public GridPanel getGridPanel() {

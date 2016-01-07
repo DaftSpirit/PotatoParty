@@ -1,4 +1,4 @@
-package pp;
+package pp.server;
 
 public class Protocol {
 		

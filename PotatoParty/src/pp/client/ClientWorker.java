@@ -13,7 +13,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import pp.Protocol;
 import pp.client.game2048.Game2048Model;
 import pp.client.game2048.GridPanel;
 

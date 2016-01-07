@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import pp.Protocol;
 import pp.server.game2048.Game2048Model;
 
 public class ServerWorker implements Runnable {

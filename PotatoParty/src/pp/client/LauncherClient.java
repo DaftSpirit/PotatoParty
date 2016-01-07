@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import pp.Protocol;
 import pp.client.game2048.GridPanel;
 import pp.client.game2048.MyKeyListener;
 

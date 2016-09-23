@@ -1,6 +1,7 @@
 ![potato](PotatoParty/res/potato.gif)
 # PotatoParty
 Repo of the big project of 2048 game <br/>
+A java-based application with ultra light client app to play a 2048 game. The game model is set on a server <br/>
 Made by @Karuskrokro && @DaftSpirit
 
 ## How to configure the game

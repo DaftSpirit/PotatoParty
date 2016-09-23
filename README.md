@@ -33,9 +33,11 @@ You have to make **2** runnable .jar files
 
 Simply run the server wherever you want and then run as many clients as you want anywhere =)
 
+## Sources
+
+[2048 game model] (http://java-articles.info/articles/?p=516)
+
 # Have potato fun !
 
 ![potato](PotatoParty/res/potato.gif)
-
-copyright @Karuskrokro && @DaftSpirit
 

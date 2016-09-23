@@ -28,5 +28,4 @@ Simply run the server wherever you want and then run as many clients as you want
 # Have potato fun !
 
 ![potato](PotatoParty/res/potato.gif)
-Format: ![AltText](potatoFun)
 

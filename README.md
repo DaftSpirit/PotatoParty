@@ -1,6 +1,7 @@
 ![potato](PotatoParty/res/potato.gif)
 # PotatoParty
 Repo of the big project of 2048 game
+Made by @Karuskrorko && @DaftSpirit
 
 ## How to configure the game
 
@@ -35,4 +36,6 @@ Simply run the server wherever you want and then run as many clients as you want
 # Have potato fun !
 
 ![potato](PotatoParty/res/potato.gif)
+
+copyright @Karuskrokro && @DaftSpirit
 

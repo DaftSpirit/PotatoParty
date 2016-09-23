@@ -1,6 +1,6 @@
 ![potato](PotatoParty/res/potato.gif)
 # PotatoParty
-Repo of the big project of 2048 game
+Repo of the big project of 2048 game <br/>
 Made by @Karuskrorko && @DaftSpirit
 
 ## How to configure the game

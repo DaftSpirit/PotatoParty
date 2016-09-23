@@ -1,3 +1,4 @@
+![potato](PotatoParty/res/potato.gif)
 # PotatoParty
 Repo of the big project of 2048 game
 

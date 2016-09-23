@@ -21,13 +21,17 @@ new Thread(new Server(InetAddress.getByName("localhost"), 9090, worker)).start()
 
 You have to make **2** runnable .jar files 
 * One with a run configuration with LauncherServer.java for the server side
-    * javac -classpath . *.java
-    * jar cvfm PotatoPartyServer.jar META-INF/MANIFEST.MF *.class
-    * java -cp ./PotatoPartyServer.jar LauncherServer  
+```
+    $> javac -classpath . *.java
+    $> jar cvfm PotatoPartyServer.jar META-INF/MANIFEST.MF *.class
+    $> java -cp ./PotatoPartyServer.jar LauncherServer  
+```
 * One with a run configuration with LauncherClient.java for the client side
-    * javac -classpath . *.java
-    * jar cvfm PotatoPartyClient.jar META-INF/MANIFEST.MF *.class
-    * java -cp ./PotatoPartyClient.jar LauncherClient 
+```
+    $> javac -classpath . *.java
+    $> jar cvfm PotatoPartyClient.jar META-INF/MANIFEST.MF *.class
+    $> java -cp ./PotatoPartyClient.jar LauncherClient  
+```
  
 ## How to launch a game
 

@@ -25,13 +25,13 @@ You have to make **2** runnable .jar files
 ```
     $> javac -classpath . *.java
     $> jar cvfm PotatoPartyServer.jar META-INF/MANIFEST.MF *.class
-    $> java -cp ./PotatoPartyServer.jar LauncherServer  
+    $> java -cp ./PotatoPartyServer.jar pp.server.LauncherServer  
 ```
 * One with a run configuration with LauncherClient.java for the client side
 ```
     $> javac -classpath . *.java
     $> jar cvfm PotatoPartyClient.jar META-INF/MANIFEST.MF *.class
-    $> java -cp ./PotatoPartyClient.jar LauncherClient  
+    $> java -cp ./PotatoPartyClient.jar pp.client.LauncherClient  
 ```
  
 ## How to launch a game

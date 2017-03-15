@@ -40,8 +40,8 @@ Simply run the server wherever you want and then run as many clients as you want
 
 ## Sources
 
-* [2048 game model] (http://java-articles.info/articles/?p=516)
-* [NIO Sockets] (http://rox-xmlrpc.sourceforge.net/niotut/)
+* [2048 game model](http://java-articles.info/articles/?p=516)
+* [NIO Sockets](http://rox-xmlrpc.sourceforge.net/niotut/)
 
 # Have potato fun !
 
